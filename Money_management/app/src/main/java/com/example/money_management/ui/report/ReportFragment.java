@@ -1,4 +1,4 @@
-package com.example.money_management.ui.dashboard;
+package com.example.money_management.ui.report;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.money_management.databinding.FragmentDashboardBinding;
+import com.example.money_management.databinding.FragmentReportBinding;
 
-public class DashboardFragment extends Fragment {
+public class ReportFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentReportBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        ReportViewModel homeViewModel =
+                new ViewModelProvider(this).get(ReportViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentReportBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textReport;
+        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
