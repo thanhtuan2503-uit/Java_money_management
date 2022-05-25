@@ -1,6 +1,11 @@
 package com.example.money_management;
 
 import android.os.Bundle;
+import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -14,24 +19,19 @@ import com.example.money_management.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
+    private static final int FRAGMENT_TRANSACTION=1;
+    private static final int FRAGMENT_REPORT=2;
+    private static final int FRAGMENT_NOTE=3;
+    private static final int FRAGMENT_ACCOUNT=4;
+
+    private int current_Fragment=FRAGMENT_TRANSACTION;
+    private BottomNavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_transaction, R.id.navigation_report, R.id.navigation_note, R.id.navigation_account)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        navigationView = findViewById(R.id.bottomNavigationView);
     }
-
 }

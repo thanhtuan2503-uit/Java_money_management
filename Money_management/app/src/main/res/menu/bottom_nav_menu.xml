@@ -10,6 +10,9 @@
         android:id="@+id/navigation_report"
         android:icon="@drawable/ic_chart"
         android:title="@string/title_report" />
+    <item
+        android:id="@+id/placeholder"
+        android:title=""/>
 
     <item
         android:id="@+id/navigation_note"
