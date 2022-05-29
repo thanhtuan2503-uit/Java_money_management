@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_transaction"
+        android:id="@+id/transaction"
         android:icon="@drawable/ic_wallet"
         android:title="@string/title_transaction" />
 
     <item
-        android:id="@+id/navigation_report"
+        android:id="@+id/report"
         android:icon="@drawable/ic_chart"
         android:title="@string/title_report" />
     <item
@@ -15,11 +15,11 @@
         android:title=""/>
 
     <item
-        android:id="@+id/navigation_note"
+        android:id="@+id/note"
         android:icon="@drawable/ic_note"
         android:title="@string/title_note" />
     <item
-        android:id="@+id/navigation_account"
+        android:id="@+id/account"
         android:icon="@drawable/ic_account"
         android:title="@string/title_account"/>
 

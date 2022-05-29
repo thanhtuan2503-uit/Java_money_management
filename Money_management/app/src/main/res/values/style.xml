@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="username">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+    <style name="user_email">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#696565
+        </item>
+    </style>
+    <style name="user_infor">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+    <style name="account">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="button_logout">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">#00B212</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="button_change_password">
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="forgot_password">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">#00B212</item>
+    </style>
+</resources>

@@ -1,7 +1,39 @@
 <resources>
     <string name="app_name">Money_management</string>
-    <string name="title_report">Report</string>
-    <string name="title_note">Note</string>
-    <string name="title_transaction">Transaction</string>
-    <string name="title_account" >Account</string>
+    <string name="title_report">Báo cáo</string>
+    <string name="title_note">Sổ nợ</string>
+    <string name="title_transaction">Sổ giao dịch</string>
+    <string name="title_account">Tài khoản</string>
+    <string name="username">Nguyễn Ngọc Thạch</string>
+    <string name="user_email">19522065@gm.uit.edu.vn</string>
+    <string name="user_infor">Thông tin người dùng</string>
+    <string name="setting">Cài đặt</string>
+    <string name="question">Câu hỏi</string>
+    <string name="introduction">Giới thiệu</string>
+    <string name="button_logout">ĐĂNG XUẤT</string>
+    <string name="account">Tài khoản</string>
+    <string name="account_infor">Thông tin cá nhân</string>
+    <string name="change_name">Đổi tên</string>
+    <string name="change_password">ĐỔI MẬT KHẨU</string>
+    <string name="change_password1">Đổi mật khẩu</string>
+    <string name="password_new">Mật khẩu mới</string>
+    <string name="password_current">Mật khẩu hiện tại</string>
+    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="enter_newname">Nhập tên mới</string>
+    <string name="change_name1">ĐỔI TÊN</string>
+    <string name="display">Hiển thị</string>
+    <string name="display_money">Kiểu hiển thị số tiền</string>
+    <string name="display_date">Kiểu hiển thị ngày</string>
+    <string name="notification">Thông báo</string>
+    <string name="remind_add_transaction">Nhắc thêm giao dịch</string>
+    <string name="data">Dữ liệu</string>
+    <string name="money">19,520,000 đ</string>
+    <string name="display_currency">Hiển thị đơn vị tiền tệ</string>
+    <string name="short_money">Rút gọn số tiền</string>
+    <string name="display_day">15/04/2022</string>
+    <string name="month_day_year">Tháng / Ngày / Năm</string>
+    <string name="day_month_year">Ngày / Tháng / Năm</string>
+    <string name="question1">Dữ liệu của tôi có bảo mật\nkhông?</string>
+    <string name="question2">Tôi quên mật khẩu thì làm gì?</string>
+
 </resources>
