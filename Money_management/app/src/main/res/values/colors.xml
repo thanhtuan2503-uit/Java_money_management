@@ -7,6 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="login">#ffff</color>
     <color name="checked">#C4C4C4</color>
     <color name="buttonAdd">#00B212</color>
+    <color name="selected_reditem_nav">#429EE8</color>
+    <color name="blue_500">#0277BD</color>
+    <color name="blue_200">#03A9F4</color>
 </resources>

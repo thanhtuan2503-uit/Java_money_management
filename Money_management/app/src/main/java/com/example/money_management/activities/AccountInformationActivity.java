@@ -1,24 +1,21 @@
 package com.example.money_management.activities;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.money_management.R;
 import com.example.money_management.fragments.AccountFragment;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.cardview.widget.CardView;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.money_management.databinding.ActivityAccountInformationBinding;
+import androidx.fragment.app.Fragment;
 
 public class AccountInformationActivity extends AppCompatActivity {
     private CardView btnChangeName, btnChangePassword, btnLogout;
@@ -53,11 +50,27 @@ public class AccountInformationActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), AccountFragment.class));
-                finish();
+
             }
         });
 
+    }
+    public boolean popFragment() {
+        boolean isPop = false;
+        Fragment currentFragment = getSupportFragmentManager()
+                .findFragmentById(R.id.transaction);
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            isPop = true;
+            getSupportFragmentManager().popBackStackImmediate();
+        }
+        return isPop;
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (!popFragment()) {
+            finish();
+        }
     }
     private void mapping(){
         btnChangeName = findViewById(R.id.button_changeName);
