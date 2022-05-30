@@ -3,12 +3,324 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.TransactionFragment">
-    <TextView
-        android:layout_width="wrap_content"
+    tools:context=".fragments.TransactionFragment"
+    android:background="#C4C4C4">
+
+    <RelativeLayout
+        android:id="@+id/summary_month"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Transaction fragment"
-        android:textSize="25dp"
-        android:layout_centerInParent="true"/>
+        android:background="#ffffff">
+        <TableLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:stretchColumns="*">
+            <TableRow>
+                <TextView
+                    android:text="Tiền vào"
+                    android:padding="3dip"
+                    android:textColor="#000000"/>
+                <TextView
+                    android:text="8,050,000"
+                    android:padding="3dip"
+                    android:gravity="right"
+                    android:textColor="#00B212"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                    android:text="Tiền ra"
+                    android:padding="3dip"
+                    android:textColor="#000000"/>
+                <TextView
+                    android:text="7,500,000"
+                    android:padding="3dip"
+                    android:gravity="right"
+                    android:textColor="#F60000"/>
+            </TableRow>
+
+            <TableRow>
+                <TextView/>
+                <View
+                    android:layout_height="2dip"
+                    android:background="#FF909090" />
+            </TableRow>
+
+            <TableRow>
+                <TextView/>
+                <TextView
+                    android:text="550,000"
+                    android:padding="3dip"
+                    android:gravity="right"
+                    android:textStyle="bold"
+                    android:textColor="#000000"/>
+            </TableRow>
+        </TableLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/transaction_layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/summary_month">
+        <TableLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:stretchColumns="*">
+
+            <TableRow android:layout_height="match_parent"
+                android:gravity="center">
+                <RelativeLayout
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/transaction_id2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:padding="3dip"
+                        android:text="2"
+                        android:textColor="#000000"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/transaction_day2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/transaction_id2"
+                        android:text="Thứ ba"
+                        android:layout_marginTop="3dip"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/transaction_day2"
+                        android:layout_toRightOf="@+id/transaction_id2"
+                        android:text="tháng 2 2022"
+                        android:textColor="#747373" />
+                </RelativeLayout>
+
+                <TextView
+                    android:text="-190,000"
+                    android:gravity="right"
+                    android:textColor="#000000"/>
+            </TableRow>
+            <View
+                android:layout_height="2dip"
+                android:background="#CDCDCD" />
+            <TableRow>
+                <RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/transaction_pic1"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10sp"
+                        android:layout_toRightOf="@+id/transaction_pic1"
+                        android:text="Ăn uống" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:text="55,000"
+                    android:layout_marginTop="10sp"
+                    android:textColor="#F60000"/>
+            </TableRow>
+            <TableRow>
+                <RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/transaction_pic2"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10sp"
+                        android:layout_toRightOf="@+id/transaction_pic2"
+                        android:text="Bảo dưỡng xe" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:text="115,000"
+                    android:layout_marginTop="10sp"
+                    android:textColor="#F60000"/>
+            </TableRow>
+            <TableRow>
+                <RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/transaction_pic3"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hẹn hò"
+                        android:layout_toRightOf="@+id/transaction_pic3"
+                        android:layout_marginTop="10sp"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:text="20,000"
+                    android:layout_marginTop="10sp"
+                    android:textColor="#F60000"/>
+            </TableRow>
+        </TableLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/transaction_layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/transaction_layout2">
+        <TableLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:stretchColumns="*">
+
+            <TableRow android:layout_height="match_parent"
+                android:gravity="center">
+                <RelativeLayout
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/transaction_id1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:padding="3dip"
+                        android:text="1"
+                        android:textColor="#000000"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:id="@+id/transaction_day1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dip"
+                        android:layout_toRightOf="@+id/transaction_id1"
+                        android:text="Thứ hai"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/transaction_day1"
+                        android:layout_toRightOf="@+id/transaction_id1"
+                        android:text="tháng 2 2022"
+                        android:textColor="#747373" />
+                </RelativeLayout>
+
+                <TextView
+                    android:text="+70,000"
+                    android:gravity="right"
+                    android:textColor="#000000"/>
+            </TableRow>
+            <View
+                android:layout_height="2dip"
+                android:background="#CDCDCD" />
+            <TableRow>
+                <RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/transaction_pic4"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10sp"
+                        android:layout_toRightOf="@+id/transaction_pic4"
+                        android:text="Xem phim" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:text="55,000"
+                    android:layout_marginTop="10sp"
+                    android:textColor="#F60000"/>
+            </TableRow>
+            <TableRow>
+                <RelativeLayout>
+                    <ImageView
+                        android:id="@+id/transaction_pic5"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10sp"
+                        android:layout_toRightOf="@+id/transaction_pic5"
+                        android:text="Ăn uống" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:text="50,000"
+                    android:layout_marginTop="10sp"
+                    android:textColor="#F60000"/>
+            </TableRow>
+            <TableRow>
+                <RelativeLayout>
+                    <ImageView
+                        android:id="@+id/transaction_pic6"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10sp"
+                        android:layout_toRightOf="@+id/transaction_pic6"
+                        android:text="A trả nợ" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:text="75,000"
+                    android:layout_marginTop="10sp"
+                    android:textColor="#00B212"/>
+            </TableRow>
+            <TableRow>
+                <RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/transaction_pic7"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10sp"
+                        android:layout_toRightOf="@+id/transaction_pic7"
+                        android:text="Hốt hụi" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:gravity="right"
+                    android:text="100,000"
+                    android:layout_marginTop="10sp"
+                    android:textColor="#00B212"/>
+            </TableRow>
+        </TableLayout>
+    </RelativeLayout>
 
 </RelativeLayout>
