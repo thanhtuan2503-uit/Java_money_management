@@ -13,39 +13,65 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Money_management"
         tools:targetApi="31">
+
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:theme="@style/Theme.Login"/>
+
+        <activity
+            android:name=".activities.LoginActivity"
+            android:theme="@style/Theme.Login"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activities.IntroductionActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".QuestionQuestion2Activity"
-            android:exported="false" />
+            android:name=".activities.QuestionQuestion2Activity"
+            android:exported="false"
+            android:parentActivityName=".activities.QuestionActivity" />
         <activity
-            android:name=".QuestionQuestion1Activity"
-            android:exported="false" />
+            android:name=".activities.QuestionQuestion1Activity"
+            android:exported="false"
+            android:parentActivityName=".activities.QuestionActivity" />
         <activity
-            android:name=".QuestionActivity"
-            android:exported="false" />
+            android:name=".activities.QuestionActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".RemindAddTransactionActivity"
-            android:exported="false" />
+            android:name=".activities.RemindAddTransactionActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.SettingActivity" />
         <activity
-            android:name=".DisplayDateActivity"
-            android:exported="false" />
+            android:name=".activities.DisplayDateActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.SettingActivity" />
         <activity
-            android:name=".DisplayMoneyActivity"
-            android:exported="false" />
+            android:name=".activities.DisplayMoneyActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.SettingActivity" />
         <activity
-            android:name=".SettingActivity"
-            android:exported="false" />
+            android:name=".activities.SettingActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.ChangeNameActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".activities.AccountInformationActivity" />
         <activity
             android:name=".activities.ChangePasswordActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".activities.AccountInformationActivity" />
         <activity
             android:name=".activities.AccountInformationActivity"
             android:exported="false"
+            android:parentActivityName=".activities.MainActivity"
             android:theme="@style/Theme.Money_management.NoActionBar" />
         <activity
             android:name=".activities.MainActivity"

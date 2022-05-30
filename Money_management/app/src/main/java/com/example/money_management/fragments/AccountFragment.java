@@ -7,14 +7,15 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.example.money_management.activities.IntroductionActivity;
-import com.example.money_management.QuestionActivity;
+import com.example.money_management.activities.MainActivity;
+import com.example.money_management.activities.QuestionActivity;
 import com.example.money_management.R;
-import com.example.money_management.SettingActivity;
+import com.example.money_management.activities.SettingActivity;
 import com.example.money_management.activities.AccountInformationActivity;
 
 public class AccountFragment extends Fragment {
@@ -72,7 +73,6 @@ public class AccountFragment extends Fragment {
         });
         return mView;
     }
-
 
     private void mapping(){
         btnAccountIn = mView.findViewById(R.id.button_accountInfor);

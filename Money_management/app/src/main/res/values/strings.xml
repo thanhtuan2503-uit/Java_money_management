@@ -35,5 +35,6 @@
     <string name="day_month_year">Ngày / Tháng / Năm</string>
     <string name="question1">Dữ liệu của tôi có bảo mật\nkhông?</string>
     <string name="question2">Tôi quên mật khẩu thì làm gì?</string>
+    <string name="txt_register">Đăng ký</string>
 
 </resources>

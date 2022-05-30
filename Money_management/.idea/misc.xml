@@ -3,9 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/Users/ADMIN/Thach/Java/Code/Java_money_management/Money_management/app/src/main/res/layout/activity_account_information.xml" value="0.1828125" />
         <entry key="..\:/Users/ADMIN/Thach/Java/Code/Java_money_management/Money_management/app/src/main/res/layout/activity_change_name.xml" value="0.1828125" />
         <entry key="..\:/Users/ADMIN/Thach/Java/Code/Java_money_management/Money_management/app/src/main/res/layout/activity_question.xml" value="0.1828125" />
+=======
+        <entry key="..\:/Users/HIEU VY/Desktop/Java_money_management/Money_management/app/src/main/res/layout/activity_change_name.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/HIEU VY/Desktop/Java_money_management/Money_management/app/src/main/res/layout/activity_main.xml" value="0.3625" />
+        <entry key="..\:/Users/HIEU VY/Desktop/Java_money_management/Money_management/app/src/main/res/layout/activity_remind__add_transaction.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/HIEU VY/Desktop/Java_money_management/Money_management/app/src/main/res/layout/fragment_account.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/HIEU VY/Desktop/Java_money_management/Money_management/app/src/main/res/layout/fragment_transaction.xml" value="0.3625" />
+>>>>>>> a68613d34b7cf06ebb7aac57b8702624cf822dbf
         <entry key="..\:/Users/TUAN/Documents/Money_management/app/src/main/res/drawable-v24/ic_account.xml" value="0.1655" />
         <entry key="..\:/Users/TUAN/Documents/Money_management/app/src/main/res/drawable-v24/ic_add.xml" value="0.1655" />
         <entry key="..\:/Users/TUAN/Documents/Money_management/app/src/main/res/drawable-v24/ic_add_foreground.xml" value="0.1655" />
@@ -34,7 +42,9 @@
         <entry key="..\:/Users/TUAN/Documents/Money_management/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />
         <entry key="..\:/Users/TUAN/Documents/Money_management/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.121" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/drawable-v24/ic_add_foreground.xml" value="0.2195" />
+        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/drawable-v24/ic_outline_lock_24.xml" value="0.1565" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/drawable-v24/ic_wallet.xml" value="0.2195" />
+        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/drawable-v24/transp.xml" value="0.1565" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/drawable/avatar.xml" value="0.218" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/drawable/background_account.xml" value="0.218" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/drawable/button_change_passwor_acc.xml" value="0.218" />
@@ -58,10 +68,12 @@
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_display_date.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_display_money.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_introduction.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_login.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_question.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_question_question1.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_question_question2.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_register.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_remind__add_transaction.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_setting.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/content_main.xml" value="0.27447916666666666" />
@@ -71,11 +83,17 @@
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/fragment_report.xml" value="0.25" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/fragment_second.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/fragment_transaction.xml" value="0.10989583333333333" />
+        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/toolbar_account_information.xml" value="0.264" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25" />
+        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1565" />
       </map>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+=======
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+>>>>>>> a68613d34b7cf06ebb7aac57b8702624cf822dbf
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
