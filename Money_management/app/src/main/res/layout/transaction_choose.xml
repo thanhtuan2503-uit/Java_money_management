@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/transacion_recieve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Các loại thu"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:textColor="#000000"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dip"
+        android:background="#CDCDCD"
+        android:layout_below="@+id/transacion_recieve"/>
+    <TextView
+        android:id="@+id/transacion_spend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/transacion_recieve"
+        android:text="Các loại chi"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:textColor="#000000"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dip"
+        android:background="#CDCDCD"
+        android:layout_below="@+id/transacion_spend"/>
+</RelativeLayout>
