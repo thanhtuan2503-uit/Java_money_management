@@ -35,6 +35,13 @@ public class QuestionActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
     @Override
     public void onBackPressed() {

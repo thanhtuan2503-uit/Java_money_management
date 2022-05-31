@@ -1,5 +1,6 @@
 package com.example.money_management.fragments;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.money_management.activities.IntroductionActivity;
+import com.example.money_management.activities.LoginActivity;
 import com.example.money_management.activities.MainActivity;
 import com.example.money_management.activities.QuestionActivity;
 import com.example.money_management.R;
@@ -33,11 +35,11 @@ public class AccountFragment extends Fragment {
         mView= inflater.inflate(R.layout.fragment_account, container, false);
         mapping();
 
+
         btnAccountIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(),AccountInformationActivity.class));
-                getActivity().finish();
             }
         });
 
@@ -45,7 +47,6 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), SettingActivity.class));
-                getActivity().finish();
             }
         });
 
@@ -53,7 +54,6 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), IntroductionActivity.class));
-                getActivity().finish();
             }
         });
 
@@ -61,13 +61,14 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), QuestionActivity.class));
-                getActivity().finish();
             }
         });
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(getContext(), LoginActivity.class));
+                getActivity().finish();
 
             }
         });
