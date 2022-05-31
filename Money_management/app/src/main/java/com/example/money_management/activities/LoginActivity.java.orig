@@ -48,16 +48,22 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mapping();
+<<<<<<< HEAD
+        Log.d(thisTag, "Đang ở trang login");
 
-
+=======
+      
+>>>>>>> b89e123a739999230fc0c2dab464eb8420a5f121
         txtViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
                 finish();
             }
         });
 
+
+        // Sự kiện onclick cho button đăng nhập.
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,14 +73,14 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(thisTag, "Email: " + email + "   Password: " + password);
 
                 // Kiểm tra thiếu thông tin
-                if (checkLoginTextEmpty(email, password)) {
+                if(checkLoginTextEmpty(email, password)) {
                     AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
                     alertDialog.setTitle("Thiếu thông tin");
                     alertDialog.setMessage(("Hãy điền đủ thông tin"));
                     alertDialog.show();
                     Log.d(thisTag, "Thiếu thông tin");
                     return;
-                } else
+                }else
                     Log.d(thisTag, "Đủ thông tin");
 
                 // Kiểm tra username có phải là email
@@ -88,18 +94,19 @@ public class LoginActivity extends AppCompatActivity {
                 checkAccountExist(new EmailCallback() {
                     @Override
                     public void isEmailExist(boolean exist, String remotePassword) {
-                        if (exist) {  // Tài khoản tồn tại
-                            if (md5(password).equals(remotePassword)) { // Đúng password
+                        if(exist) {  // Tài khoản tồn tại
+                            if(md5(password).equals(remotePassword)) { // Đúng password
                                 Log.d(thisTag, "Đăng nhập thành công");
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));  // Mở trang chủ
-                            } else { // Sai password
+                            } else{ // Sai password
                                 AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
                                 alertDialog.setTitle("Sai mật khẩu");
                                 alertDialog.setMessage(("Hãy kiểm tra lại thông tin"));
                                 alertDialog.show();
                                 Log.d(thisTag, "Sai mật khẩu");
                             }
-                        } else { // Không tồn tại tài khoản
+                        }
+                        else { // Không tồn tại tài khoản
                             AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
                             alertDialog.setTitle("Tài khoản không tồn tại");
                             alertDialog.setMessage(("Hãy kiểm tra lại thông tin"));
@@ -127,6 +134,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     // Kiểm tra nội dung người dùng nhập có phải là email không.
     // True là email, False không là email.
     private boolean checkLoginTextFormat(CharSequence email){
@@ -200,4 +208,5 @@ public class LoginActivity extends AppCompatActivity {
         btnFacebook = findViewById(R.id.button_facebook);
         btnGoogle = findViewById(R.id.button_google);
     }
+
 }
