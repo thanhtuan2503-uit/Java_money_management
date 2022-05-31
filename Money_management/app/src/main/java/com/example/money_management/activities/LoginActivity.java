@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView btnFacebook, btnGoogle;
     private final String thisTag = "LoginActivityTag";
 
-    interface EmailCallback{
+    private interface EmailCallback{
         void isEmailExist(boolean exist, String remotePassword);
     }
 
@@ -66,6 +66,18 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d(thisTag, "Đang kiểm tra dữ liệu nhập vào");
                 Log.d(thisTag, "Email: " + email + "   Password: " + password);
 
+                // Kiểm tra username có phải là email
+                if (!checkLoginTextFormat(email)) {
+                    Log.d(thisTag, "Không là định dạng email");
+                    AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
+                    alertDialog.setTitle("Email không đúng định dạng");
+                    alertDialog.setMessage(("Hãy kiểm tra lại thông tin"));
+                    alertDialog.show();
+                    return;
+                }
+                else
+                    Log.d(thisTag, "Là định dạng email");
+
                 // Kiểm tra thiếu thông tin
                 if (checkLoginTextEmpty(email, password)) {
                     AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
@@ -77,13 +89,6 @@ public class LoginActivity extends AppCompatActivity {
                 } else
                     Log.d(thisTag, "Đủ thông tin");
 
-                // Kiểm tra username có phải là email
-                boolean isAnEmail = false;
-                if (!checkLoginTextFormat(email))
-                    Log.d(thisTag, "Không là định dạng email");
-                else
-                    Log.d(thisTag, "Là định dạng email");
-
                 // Kiểm tra tài khoản có tồn tại trên firebase không, kiểm trả luôn mật khẩu.
                 checkAccountExist(new EmailCallback() {
                     @Override
@@ -92,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (md5(password).equals(remotePassword)) { // Đúng password
                                 Log.d(thisTag, "Đăng nhập thành công");
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));  // Mở trang chủ
+                                //finish()
                             } else { // Sai password
                                 AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
                                 alertDialog.setTitle("Sai mật khẩu");
@@ -108,8 +114,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 }, email);
-
-                //finish();
             }
         });
 
@@ -127,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     // Kiểm tra nội dung người dùng nhập có phải là email không.
     // True là email, False không là email.
     private boolean checkLoginTextFormat(CharSequence email){
@@ -172,7 +177,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     //Hàm hash mật khẩu MD5
-    public String md5(String s) {
+    private String md5(String s) {
         try {
             // Create MD5 Hash
             MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
