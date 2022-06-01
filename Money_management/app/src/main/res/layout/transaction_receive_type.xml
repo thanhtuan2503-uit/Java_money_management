@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TableRow>
+            <RelativeLayout
+                android:padding="10dp">
+                <ImageView
+                    android:id="@+id/img_spend_type1"
+                    android:layout_height="40sp"
+                    android:layout_width="40sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/img_spend_type1"
+                    android:text="Lương"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+        </TableRow>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:background="#CDCDCD"/>
+        <TableRow>
+            <RelativeLayout
+                android:padding="10dp">
+                <ImageView
+                    android:id="@+id/img_spend_type2"
+                    android:layout_height="40sp"
+                    android:layout_width="40sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/img_spend_type2"
+                    android:text="Hốt hụi"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+        </TableRow>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:background="#CDCDCD"/>
+        <TableRow>
+            <RelativeLayout
+                android:padding="10dp">
+                <ImageView
+                    android:id="@+id/img_spend_type3"
+                    android:layout_height="40sp"
+                    android:layout_width="40sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thêm loại"
+                    android:layout_toRightOf="@+id/img_spend_type3"
+                    android:textSize="20sp"
+                    android:textColor="#000000"/>
+            </RelativeLayout>
+        </TableRow>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:background="#CDCDCD"/>
+    </TableLayout>
+</RelativeLayout>

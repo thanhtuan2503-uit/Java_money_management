@@ -1,9 +1,19 @@
 package com.example.money_management.activities;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.NavUtils;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.money_management.R;
 import com.example.money_management.fragments.AccountFragment;
@@ -38,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     NoteFragment noteFragment= new NoteFragment();
     TransactionFragment transactionFragment = new TransactionFragment();
     ReportFragment reportFragment = new ReportFragment();
+    private long pressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,27 +59,52 @@ public class MainActivity extends AppCompatActivity {
 
         // Thanh Điều Hướng
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,transactionFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container,transactionFragment).addToBackStack(null).commit();
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.transaction:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container,transactionFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container,transactionFragment).addToBackStack(null).commit();
                         return true;
                     case R.id.account:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container,accountFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container,accountFragment).addToBackStack(null).commit();
                         return true;
                     case R.id.note:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container,noteFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container,noteFragment).addToBackStack(null).commit();
                         return true;
                     case R.id.report:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container,reportFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container,reportFragment).addToBackStack(null).commit();
                         return true;
                 }
                 return false;
             }
+
         });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,transactionFragment).commit();
+        MenuItem item;
+        item.
+        /*Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.transaction);
+        if(fragment!=null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,transactionFragment).commit();
+            if (pressedTime + 2000 > System.currentTimeMillis()) {
+                super.onBackPressed();
+                finish();
+            } else {
+                Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+            }
+            pressedTime = System.currentTimeMillis();
+        }
+        else {
+            super.onBackPressed();
+        }*/
+
     }
 
 

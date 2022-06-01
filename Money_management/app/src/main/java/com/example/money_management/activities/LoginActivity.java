@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     private interface EmailCallback{
         void isEmailExist(boolean exist, String remotePassword);
     }
+    private long pressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -194,6 +195,17 @@ public class LoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         return "";
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (pressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            this.finish();
+        } else {
+            Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+        }
+        pressedTime = System.currentTimeMillis();
     }
 
     private void mapping() {
