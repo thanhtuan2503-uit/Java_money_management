@@ -89,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         getSupportFragmentManager().beginTransaction().replace(R.id.container,transactionFragment).commit();
         MenuItem item;
-        item.
         /*Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.transaction);
         if(fragment!=null){
             getSupportFragmentManager().beginTransaction().replace(R.id.container,transactionFragment).commit();

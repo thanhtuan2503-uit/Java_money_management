@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -38,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private MaterialButton btnLogin;
     private ImageView btnFacebook, btnGoogle;
     private final String thisTag = "LoginActivityTag";
+    private SharedPreferences sharedpreferences; // Để thay đổi dữ trạng thái đăng nhập.
 
     private interface EmailCallback{
         void isEmailExist(boolean exist, String remotePassword);
@@ -49,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mapping();
+        sharedpreferences = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE); // Chọn file có tên "LoginPreferences"
 
 
         txtViewRegister.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +101,9 @@ public class LoginActivity extends AppCompatActivity {
                         if (exist) {  // Tài khoản tồn tại
                             if (md5(password).equals(remotePassword)) { // Đúng password
                                 Log.d(thisTag, "Đăng nhập thành công");
+                                SharedPreferences.Editor editor = sharedpreferences.edit(); // Lưu trạng thái đăng nhập
+                                editor.putString("Email", email);
+                                editor.commit();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));  // Mở trang chủ
                                 //finish()
                             } else { // Sai password
@@ -157,7 +164,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Log.d(thisTag, "Thành công lấy dữ liệu từ filestore", task.getException());
                     boolean isExist = false;
-                    String remotePassword = md5(email);
+                    String remotePassword = md5(md5(email));
                     for (DocumentSnapshot document : task.getResult()) {
                         String account = document.getString("Username");
                         if (account.equals(email)) {
