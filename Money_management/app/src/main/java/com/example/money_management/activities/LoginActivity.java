@@ -53,7 +53,11 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         mapping();
         sharedpreferences = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE); // Chọn file có tên "LoginPreferences"
-
+        String logged_Email = sharedpreferences.getString("Email", null);
+        if(!logged_Email.equals("")){
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        }
 
         txtViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("Email", email);
                                 editor.commit();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));  // Mở trang chủ
-                                //finish()
+                                finish();
                             } else { // Sai password
                                 AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
                                 alertDialog.setTitle("Sai mật khẩu");

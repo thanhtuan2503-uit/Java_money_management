@@ -2,7 +2,10 @@ package com.example.money_management.activities;
 
 import android.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.money_management.R;
@@ -21,11 +24,15 @@ public class AccountInformationActivity extends AppCompatActivity {
     AccountFragment accountFragment = new AccountFragment();
     private CardView btnChangeName, btnChangePassword, btnLogout;
     private ImageView btnBack;
+    private SharedPreferences sharedpreferences; // Để thay đổi dữ trạng thái đăng nhập.
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_information);
         mapping();
+        sharedpreferences = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
+
         btnChangeName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,6 +52,11 @@ public class AccountInformationActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences.Editor editor = sharedpreferences.edit(); // Lưu trạng thái đăng nhập
+                editor.putString("Email", "");
+                editor.commit();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
             }
         });
 
