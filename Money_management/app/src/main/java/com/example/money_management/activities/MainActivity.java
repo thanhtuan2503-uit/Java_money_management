@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -48,15 +50,15 @@ public class MainActivity extends AppCompatActivity {
     NoteFragment noteFragment= new NoteFragment();
     TransactionFragment transactionFragment = new TransactionFragment();
     ReportFragment reportFragment = new ReportFragment();
-    private long pressedTime;
+    private FloatingActionButton btnAddTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mapping();
 
         //databaseTesting();
-
         // Thanh Điều Hướng
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         getSupportFragmentManager().beginTransaction().add(R.id.container,transactionFragment).addToBackStack(null).commit();
@@ -80,11 +82,19 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return false;
             }
-
         });
 
+        btnAddTransaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), TransactionAddActivity.class));
+            }
+        });
     }
-
+    // ánh xạ
+    private void mapping(){
+        btnAddTransaction = findViewById(R.id.btn_add_transaction);
+    }
     @Override
     public void onBackPressed() {
         getSupportFragmentManager().beginTransaction().replace(R.id.container,transactionFragment).commit();
@@ -105,8 +115,6 @@ public class MainActivity extends AppCompatActivity {
         }*/
 
     }
-
-
     // Ham test doc, ghi du lieu tu firestore
     public void databaseTesting(){
         // Tao instance
@@ -151,8 +159,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
-
-
     }
 
 }

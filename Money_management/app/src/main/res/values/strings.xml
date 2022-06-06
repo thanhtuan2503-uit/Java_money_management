@@ -36,5 +36,10 @@
     <string name="question1">Dữ liệu của tôi có bảo mật\nkhông?</string>
     <string name="question2">Tôi quên mật khẩu thì làm gì?</string>
     <string name="txt_register">Đăng ký</string>
+    <string name="title_activity_spend_type">SpendTypeActivity</string>
+    <string name="type_spending"><u>Loại chi tiêu?</u></string>
+    <string name="image"><u>Hình ảnh</u></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
