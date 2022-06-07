@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     TransactionFragment transactionFragment = new TransactionFragment();
     ReportFragment reportFragment = new ReportFragment();
     private FloatingActionButton btnAddTransaction;
+    private long pressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,9 +100,10 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         getSupportFragmentManager().beginTransaction().replace(R.id.container,transactionFragment).commit();
         MenuItem item;
-        /*Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.transaction);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.transaction);
         if(fragment!=null){
             getSupportFragmentManager().beginTransaction().replace(R.id.container,transactionFragment).commit();
+
             if (pressedTime + 2000 > System.currentTimeMillis()) {
                 super.onBackPressed();
                 finish();
@@ -112,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             super.onBackPressed();
-        }*/
+        }
 
     }
     // Ham test doc, ghi du lieu tu firestore
