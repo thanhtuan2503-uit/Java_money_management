@@ -7,6 +7,4 @@
 /build
 /captures
 .externalNativeBuild
-*.xml
 Money_management/.idea/compiler.xml
-*.xml
