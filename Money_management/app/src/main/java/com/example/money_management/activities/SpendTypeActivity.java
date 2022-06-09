@@ -54,7 +54,7 @@ public class SpendTypeActivity extends AppCompatActivity {
         // RecyclerView
         recyclerView = findViewById(R.id.spend_type_recycler_view);
         listitem = new ArrayList<>();
-        getSpendingTypeData();  // Lấy dữ liệu về từ firestore.
+        getSpendingTypeData();
         mitemAdapter = new SpendTypeAdapter(listitem,this);
         recyclerView.setAdapter(mitemAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -107,5 +107,6 @@ public class SpendTypeActivity extends AppCompatActivity {
     private void mapping(){
         btnBack = findViewById(R.id.button_back);
         btnAdd = findViewById(R.id.button_add);
+
     }
 }

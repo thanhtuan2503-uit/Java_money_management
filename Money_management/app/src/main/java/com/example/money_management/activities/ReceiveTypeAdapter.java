@@ -19,15 +19,13 @@ import com.example.money_management.R;
 import java.util.ArrayList;
 import java.util.List;
 
+public class ReceiveTypeAdapter extends RecyclerView.Adapter<ReceiveTypeAdapter.ViewHolder> {
 
-
-public class SpendTypeAdapter extends RecyclerView.Adapter<SpendTypeAdapter.ViewHolder> {
-
-    private List<spendTypeModel> Types;
+    private List<ReceiveTypeModel> Types;
     private Context Context;
     private SharedPreferences sharedpreferences;
 
-    public SpendTypeAdapter(ArrayList<spendTypeModel> items, Context context) {
+    public ReceiveTypeAdapter(ArrayList<ReceiveTypeModel> items, Context context) {
         this.Types = items;
         this.Context = context;
 
@@ -43,7 +41,7 @@ public class SpendTypeAdapter extends RecyclerView.Adapter<SpendTypeAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        spendTypeModel type = Types.get(position);
+        ReceiveTypeModel type = Types.get(position);
         holder.imgView.setImageIcon(Icon.createWithContentUri(type.Icon));
         holder.txtTransaction.setText(type.TypeName);
     }
@@ -76,7 +74,7 @@ public class SpendTypeAdapter extends RecyclerView.Adapter<SpendTypeAdapter.View
                     editor.putString("Selected Transaction Type", txtTransaction.getText().toString());
                     editor.putString("Selected Transaction Limit", txtTransaction.getText().toString());
                     editor.commit();
-                    ((SpendTypeActivity)Context).onBackPressed();
+                    ((ReceiveTypeActivity)Context).onBackPressed();
                 }
             });
         }

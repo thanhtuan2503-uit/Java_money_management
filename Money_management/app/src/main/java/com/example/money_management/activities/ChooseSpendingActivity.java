@@ -35,7 +35,6 @@ public class ChooseSpendingActivity extends AppCompatActivity {
                 editor.putString("Selected Transaction Pre-Type", "Red");
                 editor.commit();
                 startActivity(new Intent(getApplicationContext(), ReceiveTypeActivity.class));
-
             }
         });
         btnTypesOfGenera.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +42,7 @@ public class ChooseSpendingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 sharedpreferences = view.getContext().getSharedPreferences("Selected Transaction Type", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.putString("Selected Transaction Type", "Green");
+                editor.putString("Selected Transaction Pre-Type", "Green");
                 editor.commit();
                 startActivity(new Intent(getApplicationContext(), SpendTypeActivity.class));
             }

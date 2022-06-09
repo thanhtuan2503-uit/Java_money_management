@@ -61,6 +61,8 @@ public class TransactionAddActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        // Lưu dữ liệu
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
