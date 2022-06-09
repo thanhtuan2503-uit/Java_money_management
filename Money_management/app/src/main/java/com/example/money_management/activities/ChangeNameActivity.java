@@ -39,6 +39,7 @@ public class ChangeNameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_name);
         mapping();
+        Log.i("Tracking Activity Created", "ChangeNameActivity");
         sharedpreferences = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE); // Lay thong tin dang nhap
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

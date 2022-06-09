@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -21,6 +22,7 @@ public class DisplayDateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_date);
         mapping();
+        Log.i("Tracking Activity Created", "DisplayDateActivity");
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

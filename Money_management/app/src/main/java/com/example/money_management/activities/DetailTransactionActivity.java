@@ -3,6 +3,7 @@ package com.example.money_management.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ public class DetailTransactionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_transaction);
         mapping();
+        Log.i("Tracking Activity Created", "DetailTransactionActivity");
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,6 +5,7 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -20,6 +21,7 @@ public class ChooseSpendingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_spending);
         mapping();
+        Log.i("Tracking Activity Created", "ChooseSpendingActivity");
 
         btnTypesOfTaxes.setOnClickListener(new View.OnClickListener() {
             @Override

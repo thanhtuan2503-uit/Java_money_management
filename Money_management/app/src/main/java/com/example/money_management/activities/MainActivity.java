@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mapping();
+        Log.i("Tracking Activity Created", "MainActivity");
 
         //databaseTesting();
         // Thanh Điều Hướng

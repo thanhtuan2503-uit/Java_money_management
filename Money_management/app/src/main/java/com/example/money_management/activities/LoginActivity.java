@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         mapping();
+        Log.i("Tracking Activity Created", "LoginActivity");
         sharedpreferences = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE); // Chọn file có tên "LoginPreferences"
         String logged_Email = sharedpreferences.getString("Email", null);
         if(!logged_Email.equals("")){

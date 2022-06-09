@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -19,6 +20,7 @@ public class RemindAddTransactionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remind__add_transaction);
         mapping();
+        Log.i("Tracking Activity Created", "RemindAddTransactionActivity");
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

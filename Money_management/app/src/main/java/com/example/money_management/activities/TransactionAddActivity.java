@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ public class TransactionAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_add);
         mapping();
+        Log.i("Tracking Activity Created", "TransactionAddActivity");
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

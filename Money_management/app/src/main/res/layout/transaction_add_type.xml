@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:text="Tên loại"
         android:textColor="#000000"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:id="@+id/edt_date_layout"

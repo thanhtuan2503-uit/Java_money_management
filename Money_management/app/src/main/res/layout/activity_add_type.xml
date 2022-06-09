@@ -116,12 +116,11 @@
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="MissingConstraints">
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editext_money"
+                            android:id="@+id/editext_typename"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Tên loại"
-                            android:inputType="number"
                             android:textColorHint="@color/buttonAdd"
                             android:textSize="30sp"
                             android:textStyle="bold" />
@@ -165,7 +164,7 @@
                         tools:ignore="MissingConstraints">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/editext_email_LogActivity"
+                            android:id="@+id/editext_limit_transaction"
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"

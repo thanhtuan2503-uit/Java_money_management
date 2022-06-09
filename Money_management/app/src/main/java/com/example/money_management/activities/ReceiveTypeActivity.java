@@ -5,6 +5,7 @@ import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -19,6 +20,7 @@ public class ReceiveTypeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receive_type);
         mapping();
+        Log.i("Tracking Activity Created", "ReceiveTypeActivity");
         btnHotHui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

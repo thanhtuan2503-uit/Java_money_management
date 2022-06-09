@@ -49,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         anhxa();
+        Log.i("Tracking Activity Created", "RegisterActivity");
         button_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

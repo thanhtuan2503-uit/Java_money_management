@@ -13,6 +13,7 @@ import com.example.money_management.fragments.AccountFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,6 +31,7 @@ public class AccountInformationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_information);
+        Log.i("Tracking Activity Created", "AccountInformationActivity");
         mapping();
         sharedpreferences = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
 

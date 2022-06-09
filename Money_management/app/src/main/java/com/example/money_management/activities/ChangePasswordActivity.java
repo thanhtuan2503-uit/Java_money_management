@@ -47,6 +47,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
         mapping();
+        Log.i("Tracking Activity Created", "ChangePasswordActivity");
         sharedpreferences = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE); // Chọn file có tên "LoginPreferences" chứa email
 
 
