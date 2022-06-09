@@ -3,6 +3,8 @@ package com.example.money_management.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +30,7 @@ public class AddTypeActivity extends AppCompatActivity {
     private TextInputEditText editextLimitTransaction;
     private TextInputEditText editextDescribe;
     private String thisTag = "AddTypeActivity";
+    private SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,8 @@ public class AddTypeActivity extends AppCompatActivity {
     // Đưa dữ liệu lên firestore.
     private void addSpendingType(String icon, String typeName, Float limit, String describe){
         Log.i("Tracking Activity Action", "addSpendingType");
+
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         // Model

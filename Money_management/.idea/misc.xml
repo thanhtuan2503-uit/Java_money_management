@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ADMIN/Thach/Java/Code/Java_money_management/Money_management/app/src/main/res/layout/activity_register.xml" value="0.1859375" />
         <entry key="..\:/Users/ADMIN/Thach/Java/Code/Java_money_management/Money_management/app/src/main/res/layout/activity_spend_type.xml" value="0.2907608695652174" />
+        <entry key="..\:/Users/ADMIN/Thach/Java/Code/Java_money_management/Money_management/app/src/main/res/layout/activity_transaction_add.xml" value="0.2907608695652174" />
         <entry key="..\:/Users/ADMIN/Thach/Java/Code/Java_money_management/Money_management/app/src/main/res/layout/spend_type_layout.xml" value="0.2907608695652174" />
+        <entry key="..\:/Users/ADMIN/Thach/Java/Code/Java_money_management/Money_management/app/src/main/res/layout/transaction_add_type.xml" value="0.2907608695652174" />
       </map>
     </option>
   </component>

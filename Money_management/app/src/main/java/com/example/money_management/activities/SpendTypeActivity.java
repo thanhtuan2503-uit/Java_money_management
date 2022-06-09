@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +42,7 @@ public class SpendTypeActivity extends AppCompatActivity {
     private ArrayList<spendTypeModel> listitem;    // List dữ liệu để đưa vào recyclerview.
     private SpendTypeAdapter mitemAdapter;  // Adaptor
     private String thisTag = "SpendTypeActivity";
+    private SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

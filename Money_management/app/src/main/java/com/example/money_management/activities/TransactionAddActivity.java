@@ -2,7 +2,9 @@ package com.example.money_management.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +18,8 @@ public class TransactionAddActivity extends AppCompatActivity {
     private ImageView btnClose;
     private TextView btnSave;
     private MaterialTextView btnChooseSpending;
+    private SharedPreferences sharedpreferences; // Lấy dữ liệu đã chọn
+    private boolean Activity_First_Show = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +39,24 @@ public class TransactionAddActivity extends AppCompatActivity {
 
             }
         });
+
         btnChooseSpending.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), ChooseSpendingActivity.class));
             }
         });
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(!Activity_First_Show){
+            Activity_First_Show = true;
+            return;
+        }
+        sharedpreferences = getSharedPreferences("Selected Transaction Type", Context.MODE_PRIVATE);
+        btnChooseSpending.setText(sharedpreferences.getString("Selected Transaction Type", ""));
     }
 
     //Ánh xạ

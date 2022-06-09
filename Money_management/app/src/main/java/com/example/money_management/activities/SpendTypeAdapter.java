@@ -1,6 +1,7 @@
 package com.example.money_management.activities;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Icon;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,11 +10,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.money_management.R;
 
 import java.util.ArrayList;
@@ -25,6 +24,7 @@ public class SpendTypeAdapter extends RecyclerView.Adapter<SpendTypeAdapter.View
 
     private List<spendTypeModel> Types;
     private Context Context;
+    private SharedPreferences sharedpreferences;
 
     public SpendTypeAdapter(ArrayList<spendTypeModel> items, Context context) {
         this.Types = items;
@@ -69,6 +69,10 @@ public class SpendTypeAdapter extends RecyclerView.Adapter<SpendTypeAdapter.View
                                     txtTransaction.getText() +" | "
                                             + " Demo function", Toast.LENGTH_SHORT)
                             .show();
+                    sharedpreferences = view.getContext().getSharedPreferences("Selected Transaction Type", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString("Selected Transaction Type", txtTransaction.getText().toString());
+                    editor.commit();
                 }
             });
         }
