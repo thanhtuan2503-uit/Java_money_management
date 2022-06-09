@@ -72,6 +72,7 @@ public class SpendTypeAdapter extends RecyclerView.Adapter<SpendTypeAdapter.View
                     sharedpreferences = view.getContext().getSharedPreferences("Selected Transaction Type", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.putString("Selected Transaction Type", txtTransaction.getText().toString());
+                    editor.putString("Selected Transaction Limit", txtTransaction.getText().toString());
                     editor.commit();
                 }
             });
