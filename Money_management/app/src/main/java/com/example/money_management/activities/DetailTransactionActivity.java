@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.example.money_management.R;
 
 public class DetailTransactionActivity extends AppCompatActivity {
-    private ImageView btnBack;
+    private ImageView btnClose;
     private TextView btnSave;
 
     @Override
@@ -27,7 +27,7 @@ public class DetailTransactionActivity extends AppCompatActivity {
 
             }
         });
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -36,7 +36,7 @@ public class DetailTransactionActivity extends AppCompatActivity {
     }
 
     private void mapping() {
-        btnBack = findViewById(R.id.button_back);
+        btnClose = findViewById(R.id.button_close);
         btnSave = findViewById(R.id.button_save);
     }
 }

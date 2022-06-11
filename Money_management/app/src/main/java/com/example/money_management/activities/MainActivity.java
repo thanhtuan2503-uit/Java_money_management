@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
     TransactionFragment transactionFragment = new TransactionFragment();
     ReportFragment reportFragment = new ReportFragment();
     private FloatingActionButton btnAddTransaction;
-    private long pressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,23 +98,7 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.container,transactionFragment).commit();
-        MenuItem item;
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.transaction);
-        if(fragment!=null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.container,transactionFragment).commit();
-
-            if (pressedTime + 2000 > System.currentTimeMillis()) {
-                super.onBackPressed();
-                finish();
-            } else {
-                Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
-            }
-            pressedTime = System.currentTimeMillis();
-        }
-        else {
-            super.onBackPressed();
-        }
+        finish();
 
     }
     // Ham test doc, ghi du lieu tu firestore
