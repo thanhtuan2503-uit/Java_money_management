@@ -34,6 +34,6 @@ public class TransactionDynamicFragment extends Fragment {
     }
 
     private void mapping() {
-        btnChoose = mView.findViewById(R.id.btn_choose);
+        //btnChoose = mView.findViewById(R.id.btn_choose);
     }
 }

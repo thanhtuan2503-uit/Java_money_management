@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,11 +44,13 @@ public class SpendTypeActivity extends AppCompatActivity {
     private SpendTypeAdapter mitemAdapter;  // Adaptor
     private String thisTag = "SpendTypeActivity";
     private SharedPreferences sharedpreferences;
+    private Boolean FirstShow = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spend_type);
+        FirstShow = true;
         mapping();
         Log.i("Tracking Activity Created", "SpendTypeActivity");
 
@@ -78,6 +81,19 @@ public class SpendTypeActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(FirstShow == true){
+            FirstShow = false;
+            return;
+        }
+        listitem.clear();
+        mitemAdapter.clear();
+        getSpendingTypeData();
+        mitemAdapter.notifyDataSetChanged();
+    }
+
     private void getSpendingTypeData() {
         Log.d(thisTag, "Tiến hành kiểm tra thông tin trên firebase");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -103,10 +119,15 @@ public class SpendTypeActivity extends AppCompatActivity {
                 });
     }
 
+    // Dành cho khi bấm vào chọn 1 thể loại chi tiêu thì quay về trang trước (2 activity trước)
+    public void Back2Activity(){
+        startActivity(new Intent(getApplicationContext(), TransactionAddActivity.class));  // Mở trang chủ
+        finish();
+    }
+
     //ánh xạ
     private void mapping(){
         btnBack = findViewById(R.id.button_back);
         btnAdd = findViewById(R.id.button_add);
-
     }
 }

@@ -66,12 +66,24 @@ public class TransactionAddActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    formatter.setLenient(false);
+                    formatter.parse(editTextDate.getText().toString());
+                } catch (ParseException e) {
+                    Toast.makeText(getBaseContext(), "Hãy nhập ngày với định dạng Ngày/Tháng/Năm", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 // Model
                 sharedpreferences = getSharedPreferences("Selected Transaction Type", Context.MODE_PRIVATE);
                 String typeName =  sharedpreferences.getString("Selected Transaction Type", "");
                 sharedpreferences = getSharedPreferences("Selected Transaction Pre-Type", Context.MODE_PRIVATE);
                 String type = sharedpreferences.getString("Selected Transaction Pre-Type", "");
+                sharedpreferences = getSharedPreferences("LoginPreferences", MODE_PRIVATE);
+                String email = sharedpreferences.getString("Email", "");
                 if(type.equals("Red"))
                     type = "Chi";
                 if(type.equals("Green"))
@@ -87,6 +99,7 @@ public class TransactionAddActivity extends AppCompatActivity {
                 transaction.put("Quantity", quantity);
                 transaction.put("Note", note);
                 transaction.put("Date", date);
+                transaction.put("Email", email);
                 db.collection("Transactions")
                         .add(transaction)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

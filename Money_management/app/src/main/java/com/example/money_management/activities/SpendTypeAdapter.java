@@ -16,6 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.money_management.R;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +54,17 @@ public class SpendTypeAdapter extends RecyclerView.Adapter<SpendTypeAdapter.View
         return Types.size();
     }
 
+    public void clear() {
+        int size = Types.size();
+        if (size > 0) {
+            for (int i = 0; i < size; i++) {
+                Types.remove(0);
+            }
+
+            notifyItemRangeRemoved(0, size);
+        }
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imgView;
         public TextView txtTransaction;
@@ -76,7 +88,7 @@ public class SpendTypeAdapter extends RecyclerView.Adapter<SpendTypeAdapter.View
                     editor.putString("Selected Transaction Type", txtTransaction.getText().toString());
                     editor.putString("Selected Transaction Limit", txtTransaction.getText().toString());
                     editor.commit();
-                    ((SpendTypeActivity)Context).onBackPressed();
+                    ((SpendTypeActivity)Context).Back2Activity();
                 }
             });
         }

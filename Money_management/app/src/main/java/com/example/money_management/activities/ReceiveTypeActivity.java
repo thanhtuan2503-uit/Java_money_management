@@ -31,12 +31,14 @@ public class ReceiveTypeActivity extends AppCompatActivity {
     private ReceiveTypeAdapter mitemAdapter;  // Adaptor
     private String thisTag = "ReceiveTypeActivity";
     private SharedPreferences sharedpreferences;
+    private Boolean FirstShow = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receive_type);
         mapping();
+        FirstShow = true;
         Log.i("Tracking Activity Created", "ReceiveTypeActivity");
 
         // RecyclerView
@@ -61,6 +63,19 @@ public class ReceiveTypeActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(FirstShow == true){
+            FirstShow = false;
+            return;
+        }
+        listitem.clear();
+        mitemAdapter.clear();
+        getReceiveTypeData();
+        mitemAdapter.notifyDataSetChanged();
     }
 
     private void getReceiveTypeData() {
