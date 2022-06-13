@@ -1,10 +1,10 @@
-package com.example.money_management.activities;
+package com.example.money_management.fragments;
 
-public class spendTypeModel {
+public class TransactionDynamicFragmentModel {
     public String TypeName;
     public String Icon;
 
-    public spendTypeModel(String typeName, String icon) {
+    public TransactionDynamicFragmentModel(String typeName, String icon) {
         this.TypeName = typeName;
         this.Icon = icon;
     }
