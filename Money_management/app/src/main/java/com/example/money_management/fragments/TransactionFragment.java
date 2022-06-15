@@ -1,14 +1,13 @@
 package com.example.money_management.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.money_management.R;
 import com.google.android.material.tabs.TabLayout;
@@ -23,7 +22,7 @@ public class TransactionFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_transaction, container, false);
         mapping();
         FragmentManager manager1 = getChildFragmentManager();
-        VPAdapter adapter = new VPAdapter(manager1, getLifecycle());
+        FragmentTransactionAdapter adapter = new FragmentTransactionAdapter(manager1, getLifecycle());
         viewPager2.setAdapter(adapter);
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override

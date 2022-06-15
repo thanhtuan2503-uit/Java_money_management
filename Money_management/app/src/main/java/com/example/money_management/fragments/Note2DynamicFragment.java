@@ -1,17 +1,18 @@
 package com.example.money_management.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.money_management.R;
 
-public class DynamicNote2Fragment extends Fragment {
+public class Note2DynamicFragment extends Fragment {
+    public Note2DynamicFragment(){
 
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

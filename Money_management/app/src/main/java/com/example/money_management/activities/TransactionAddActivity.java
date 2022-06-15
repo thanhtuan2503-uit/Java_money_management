@@ -1,8 +1,6 @@
 package com.example.money_management.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,37 +8,28 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.money_management.R;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class TransactionAddActivity extends AppCompatActivity {
-    private ImageView btnClose;
+    private ImageView btnClose, cal;
     private TextInputEditText editextMoney;
     private TextInputEditText editTextDate;
     private TextInputEditText edittextNote;
@@ -48,6 +37,8 @@ public class TransactionAddActivity extends AppCompatActivity {
     private MaterialTextView btnChooseSpending;
     private SharedPreferences sharedpreferences; // Lấy dữ liệu đã chọn
     private boolean Activity_First_Show = false;
+    private TextInputEditText dateTxt;
+    private int mDate, mMonth, mYear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +104,23 @@ public class TransactionAddActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ChooseSpendingActivity.class));
             }
         });
+        cal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar Cal = Calendar.getInstance();
+                mDate = Cal.get(Calendar.DATE);
+                mMonth = Cal.get(Calendar.MONTH);
+                mYear = Cal.get(Calendar.YEAR);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(TransactionAddActivity.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        dateTxt.setText(date+"-"+month+"-"+year);
+                    }
+                },mYear, mMonth, mDate);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()-1000);
+                datePickerDialog.show();
+            }
+        });
 
 
     }
@@ -147,5 +155,7 @@ public class TransactionAddActivity extends AppCompatActivity {
         editextMoney = findViewById(R.id.editext_money);
         editTextDate = findViewById(R.id.editext_date);
         edittextNote = findViewById(R.id.edittext_note);
+        cal = findViewById(R.id.button_choose_time);
+        dateTxt = findViewById(R.id.editext_date);
     }
 }
