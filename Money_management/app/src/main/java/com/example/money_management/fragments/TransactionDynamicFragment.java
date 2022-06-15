@@ -2,9 +2,11 @@ package com.example.money_management.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,16 +16,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.money_management.R;
 import com.example.money_management.activities.MainActivity;
 import com.example.money_management.activities.SpendTypeAdapter;
+import com.example.money_management.activities.String2Currency;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,6 +45,9 @@ public class TransactionDynamicFragment extends Fragment {
     private TransactionDynamicFragmentAdapterDates parentAdapter;
     private String thisTag = "TransactionDynamicFragment";
     private Boolean FirstShow = false;
+    public TextView txtIncome;
+    public TextView txtOutcome;
+    public TextView txtSummary;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,8 +55,6 @@ public class TransactionDynamicFragment extends Fragment {
         mView= inflater.inflate(R.layout.fragment_dynamic_transaction, container, false);
         mapping();
         FirstShow = true;
-
-
 //        btnChoose.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -71,11 +79,11 @@ public class TransactionDynamicFragment extends Fragment {
         parentRecyclerView.setLayoutManager(linearLayoutManager);
     }
 
-
     private void addTransactionData2List() {
         Collections.sort(transactionList, (a, b) -> (Integer.valueOf(a.Date.split("/")[0]) < Integer.valueOf(b.Date.split("/")[0])) ? 1 : -1);
-
         String i = transactionList.get(0).Date;
+        float income = 0f;
+        float outcome= 0f;
         Float sumAmount = 0f;
         TransactionDynamicFragmentDatesModel parentModel = new TransactionDynamicFragmentDatesModel();
         parentModel.childList = new ArrayList<>();
@@ -107,6 +115,10 @@ public class TransactionDynamicFragment extends Fragment {
                 parentModel.Amount = sumAmount;
                 parentList.add(parentModel);
             }
+            if(type.equals("Thu"))
+                income+=amount;
+            else
+                outcome+=amount;
         }
         iterate = transactionList.listIterator();
         while(iterate.hasNext()) {
@@ -118,6 +130,7 @@ public class TransactionDynamicFragment extends Fragment {
             String note = transaction.Note;
             Log.i("Thêm vào recyclerView: ", fullDay + " " + typeName + " " + type + " " + note + " " + String.valueOf(amount));
         }
+        setIncomeOutcome(String.valueOf(income), String.valueOf(outcome), String.valueOf(income + outcome));
         parentAdapter.notifyDataSetChanged();
     }
 
@@ -137,11 +150,16 @@ public class TransactionDynamicFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String date = document.getString("Date");
                                 Log.i("Dữ liệu từ firestore", date);
+                                String[] dateSplit = date.split("/");
                                 if(date == null)
                                     continue;
-                                String[] dateSplit = date.split("/");
-                                if(Integer.valueOf(dateSplit[1]) != MonthFilter)
-                                    continue;
+                                try {
+                                    if(Integer.valueOf(dateSplit[1]) != MonthFilter)
+                                        continue;
+                                }catch(ArrayIndexOutOfBoundsException e){
+                                     continue;
+                                }
+
                                 String email = document.getString("Email");
                                 String type = document.getString("Type");
                                 String note = document.getString("Note");
@@ -151,19 +169,35 @@ public class TransactionDynamicFragment extends Fragment {
                                 // Lấy dữ liệu của tài khoản này.
 //                                if(!email.equals(logged_Email))
 //                                    continue;
+                                if(email == null) continue;
                                 Log.i("Dữ liệu từ firestore", email);
                                 // Filter
                                 transactionList.add(new TransactionModel(email, date, note, amount, source, type, typeName));
                             }
-
                         }
                         addTransactionData2List();
-
                     }
                 });
     }
 
+    private void setIncomeOutcome(String income, String outcome, String summary){
+        String2Currency convert = new String2Currency();
+        if(Float.valueOf(summary) >= 0)
+            txtSummary.setTextColor(Color.GREEN);
+        else
+            txtSummary.setTextColor(Color.RED);
+        income = convert.convertString2Currency(income);
+        outcome = convert.convertString2Currency(outcome);
+        summary = convert.convertString2Currency(summary);
+        txtIncome.setText(income);
+        txtOutcome.setText(outcome);
+        txtSummary.setText(summary);
+    }
+
     private void mapping() {
         //btnChoose = mView.findViewById(R.id.btn_choose);
+        txtIncome = mView.findViewById(R.id.tvIncome);
+        txtOutcome = mView.findViewById(R.id.tvOutcome);
+        txtSummary = mView.findViewById(R.id.tvSummary);
     }
 }

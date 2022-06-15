@@ -53,6 +53,7 @@
                                     android:textSize="17dp" />
 
                                 <TextView
+                                    android:id="@+id/tvIncome"
                                     android:layout_marginTop="15dp"
                                     android:layout_marginEnd="10dp"
                                     android:gravity="right"
@@ -73,6 +74,7 @@
                                     android:textSize="17dp" />
 
                                 <TextView
+                                    android:id="@+id/tvOutcome"
                                     android:layout_marginTop="5dp"
                                     android:layout_marginEnd="10dp"
                                     android:gravity="right"
@@ -100,6 +102,7 @@
                                 <TextView />
 
                                 <TextView
+                                    android:id="@+id/tvSummary"
                                     android:layout_marginEnd="10dp"
                                     android:gravity="right"
                                     android:padding="3dip"
@@ -153,7 +156,6 @@
                         android:id="@+id/transaction_dates_recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-
                     </androidx.recyclerview.widget.RecyclerView>
 
                 </RelativeLayout>
