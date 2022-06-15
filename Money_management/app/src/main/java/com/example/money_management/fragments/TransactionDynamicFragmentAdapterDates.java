@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.money_management.R;
+import com.example.money_management.activities.String2Currency;
 
 import java.lang.reflect.Array;
 import java.text.DateFormat;
@@ -42,19 +43,20 @@ public class TransactionDynamicFragmentAdapterDates extends RecyclerView.Adapter
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(Context);
-        View itemView = inflater.inflate(R.layout.fragment_dynamic_transaction_dates_layout,parent,false);
+        View itemView = inflater.inflate(R.layout.fragment_transaction_dates,parent,false);
         ViewHolder viewHolder = new ViewHolder(itemView);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        String2Currency convert = new String2Currency();
         TransactionDynamicFragmentDatesModel parentItem = parentList.get(position);
         String[] DateSplit = new String[3];
         if(parentItem.Date != null)
             DateSplit = parentItem.Date.split("/");
         holder.txtFullDate.setText(parentItem.Date);
-        holder.txtAmount.setText(String.valueOf(parentItem.Amount));
+        holder.txtAmount.setText(convert.convertString2Currency(String.valueOf(parentItem.Amount)));
         holder.txtDate.setText(DateSplit[0]);
         holder.txtDay.setText(getDayOfWeek(parentItem.Date));
         if(parentItem.Amount < 0)
@@ -105,15 +107,14 @@ public class TransactionDynamicFragmentAdapterDates extends RecyclerView.Adapter
         public TextView txtDate;
         public TextView txtDay;
         public TextView txtAmount;
-        public CardView btnItem;
         public RecyclerView childRV;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtFullDate = itemView.findViewById(R.id.tv_full_date);
-            txtDate = itemView.findViewById(R.id.tv_transaction_date);
-            txtDay = itemView.findViewById(R.id.tv_transaction_day);
-            txtAmount = itemView.findViewById(R.id.tv_amount);
-            childRV = itemView.findViewById((R.id.transaction_dates_items_recycler_view));
+            txtFullDate = itemView.findViewById(R.id.transaction_fullDate);
+            txtDate = itemView.findViewById(R.id.transaction_date);
+            txtDay = itemView.findViewById(R.id.transaction_day);
+            txtAmount = itemView.findViewById(R.id.transaction_dayAmount);
+            childRV = itemView.findViewById((R.id.rv_transaction_fragment_child));
         }
     }
 }

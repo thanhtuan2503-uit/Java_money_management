@@ -50,11 +50,13 @@ public class DetailTransactionActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("TransactionDetails", MODE_PRIVATE);
         TransactionDynamicFragmentDateItemsModel childModel = new TransactionDynamicFragmentDateItemsModel();
 
+        String2Currency convert = new String2Currency();
         String email = prefs.getString("Email", "");
         String type = prefs.getString("Type", "");
         String typeName = prefs.getString("TypeName", "");
         String date = prefs.getString("Date", "");
         String amount = prefs.getString("Amount", "");
+        String amountHD = prefs.getString("AmountHD", "");
         String source = prefs.getString("Source", "");
         String limit = prefs.getString("Limit", "");
         String id = prefs.getString("ID", "");
@@ -62,7 +64,8 @@ public class DetailTransactionActivity extends AppCompatActivity {
         childModel.Type = type;
         childModel.TypeName = typeName;
         childModel.Date = date;
-        childModel.Amount = Float.valueOf(amount);
+        childModel.Amount = Float.valueOf((amountHD));
+        Log.i("Convert!!!", String.valueOf(childModel.Amount));
         childModel.ID = id;
         editextDate.setText(date);
         editextMoney.setText(amount);
@@ -71,7 +74,7 @@ public class DetailTransactionActivity extends AppCompatActivity {
         editextSource.setText(source);
         if(type.equals("Chi")) {
             editextMoney.setTextColor(Color.RED);
-            editextMoney.setText(amount.substring(1, amount.length()));
+            editextMoney.setText((amountHD).substring(1, (amountHD).length()));
         }
         else {
             editextMoney.setTextColor(Color.GREEN);
@@ -89,8 +92,6 @@ public class DetailTransactionActivity extends AppCompatActivity {
                     return;
                 }
                 childModel.Amount = Float.valueOf(editextMoney.getText().toString());
-                if(childModel.Type.equals("Chi"))
-                    childModel.Amount = -childModel.Amount;
                 childModel.Date = editextDate.getText().toString();
                 checkAccountExist(childModel);
             }
@@ -123,7 +124,6 @@ public class DetailTransactionActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    Log.d(thisTag, "Thành công lấy dữ liệu từ filestore", task.getException());
                     for (DocumentSnapshot documentsnap : task.getResult()) {
                         Log.i("YESSS FOUND!", "!!!" + documentsnap.getId() + " " + childModel.ID);
                         if(!documentsnap.getId().equals(childModel.ID))
@@ -139,6 +139,8 @@ public class DetailTransactionActivity extends AppCompatActivity {
                     }
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
+                }else{
+                    Log.d(thisTag, "Không thành công lấy dữ liệu từ filestore", task.getException());
                 }
             }
         });

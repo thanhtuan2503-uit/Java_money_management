@@ -67,7 +67,7 @@ public class TransactionDynamicFragment extends Fragment {
 
     public void onViewCreated(View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
-        parentRecyclerView = mView.findViewById(R.id.transaction_dates_recycler_view);
+        parentRecyclerView = mView.findViewById(R.id.rv_transaction_fragment_parent);
         parentList = new ArrayList<>();
         transactionList = new ArrayList<>();
         getTransactionData(6);

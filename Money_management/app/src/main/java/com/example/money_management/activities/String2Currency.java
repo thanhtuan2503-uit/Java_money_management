@@ -2,30 +2,37 @@ package com.example.money_management.activities;
 
 import android.util.Log;
 
+import java.text.NumberFormat;
+
 public class String2Currency {
     public String2Currency(){
 
     }
     public String convertString2Currency(String input){
         String[] ip = input.split("\\.");
+        if(ip[0].length()<4)
+            return input;
         String result = "";
-        int cnt = 3;
-        int p = 1;
+        int cnt = 0;
+        boolean neg =  false;
         if(String.valueOf(ip[0].charAt(0)).equals("-"))
-            p++;
-        for(int i = p; i < ip[0].length() - 1; i++){
-            Log.i("Index", String.valueOf(i));
-            if(cnt == 3) {
-                result = result + ",";
+            neg = true;
+        if(neg)
+            ip[0] = ip[0].substring(1, ip[0].length());
+        for(int i = ip[0].length() - 1; i > 0 ; i--){
+            cnt++;
+            result = ip[0].charAt(i) + result;
+            if(cnt == 3 ) {
+                result = "," + result;
                 cnt = 0;
             }
-            result = result + ip[0].charAt(i);
-            cnt++;
         }
 
-        String prefix = "";
-        if(String.valueOf(ip[0].charAt(0)).equals("-"))
-            prefix = "-";
-        return prefix + ip[0].charAt(p-1) + result;
+        result =  ip[0].charAt(0) + result;
+
+        if(neg)
+            result = "-" + result;
+        return result + "." + ip[1] + "đ";
     }
+
 }
