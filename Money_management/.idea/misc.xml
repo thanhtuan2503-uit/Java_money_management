@@ -21,6 +21,13 @@
         <entry key="..\:/Users/HIEU VY/Desktop/Java_money_management/Money_management/app/src/main/res/layout/transaction_detail.xml" value="0.2578125" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_account_information.xml" value="0.12604166666666666" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_add_type.xml" value="0.2" />
+        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_change_name.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_change_password.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_choose_spending.xml" value="0.27025641025641023" />
+        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_detail_transaction.xml" value="0.27025641025641023" />
+        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_display_date.xml" value="0.27025641025641023" />
+        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_display_money.xml" value="0.27025641025641023" />
+        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_introduction.xml" value="0.27025641025641023" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_main.xml" value="0.27025641025641023" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_paybook_choose.xml" value="0.27025641025641023" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_paybook_spending.xml" value="0.27025641025641023" />
@@ -35,7 +42,9 @@
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_spend_type.xml" value="0.27025641025641023" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/activity_transaction_add.xml" value="0.27025641025641023" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/fragment_account.xml" value="0.27025641025641023" />
-        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/fragment_dynamic_transaction.xml" value="0.27025641025641023" />
+        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/fragment_dynamic_note.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/fragment_dynamic_note2.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/fragment_dynamic_transaction.xml" value="0.264" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/fragment_note.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/fragment_report.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/TUAN/Documents/Traing_OTS/Java_money_management/Money_management/app/src/main/res/layout/fragment_transaction.xml" value="0.27025641025641023" />
