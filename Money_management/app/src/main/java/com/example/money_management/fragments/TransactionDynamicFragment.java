@@ -95,9 +95,10 @@ public class TransactionDynamicFragment extends Fragment {
             String typeName = transaction.TypeName;
             String type = transaction.Type;
             String note = transaction.Note;
+            String id = transaction.ID;
             if(type.equals("Chi"))
                 amount = -amount;
-            Log.i("Thêm vào recyclerView: ", fullDay + " " + typeName + " " + type + " " + note + " " + String.valueOf(amount));
+            Log.i("Thêm vào recyclerView: ", fullDay + " " + typeName + " " + type + " " + note + " " + String.valueOf(amount) + transaction.Source);
             if(!i.equals(fullDay)){
                 parentModel.Date = i;
                 parentModel.Amount = sumAmount;
@@ -109,7 +110,7 @@ public class TransactionDynamicFragment extends Fragment {
             }
             Log.i("ADD child", "Child Child");
             sumAmount += amount;
-            parentModel.childList.add(new TransactionDynamicFragmentDateItemsModel(amount, typeName, type, note));
+            parentModel.childList.add(new TransactionDynamicFragmentDateItemsModel(amount, typeName, type, note, fullDay, transaction.Email, type, transaction.Source, id));
             if(!iterate.hasNext()) {
                 parentModel.Date = fullDay;
                 parentModel.Amount = sumAmount;
@@ -133,6 +134,21 @@ public class TransactionDynamicFragment extends Fragment {
         setIncomeOutcome(String.valueOf(income), String.valueOf(outcome), String.valueOf(income + outcome));
         parentAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(FirstShow == true){
+            FirstShow = false;
+            return;
+        }
+        parentList.clear();
+        parentAdapter.clear();
+        transactionList.clear();
+        getTransactionData(6);
+        parentAdapter.notifyDataSetChanged();
+    }
+
 
     private void getTransactionData(int MonthFilter) {
         SharedPreferences sharedpreferences = this.getActivity().getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
@@ -166,13 +182,14 @@ public class TransactionDynamicFragment extends Fragment {
                                 Float amount = Float.valueOf(document.getString("Quantity"));
                                 String source = document.getString("Source");
                                 String typeName = document.getString("TypeName");
+                                String id = document.getId();
                                 // Lấy dữ liệu của tài khoản này.
 //                                if(!email.equals(logged_Email))
 //                                    continue;
                                 if(email == null) continue;
                                 Log.i("Dữ liệu từ firestore", email);
                                 // Filter
-                                transactionList.add(new TransactionModel(email, date, note, amount, source, type, typeName));
+                                transactionList.add(new TransactionModel(email, date, note, amount, source, type, typeName, id));
                             }
                         }
                         addTransactionData2List();

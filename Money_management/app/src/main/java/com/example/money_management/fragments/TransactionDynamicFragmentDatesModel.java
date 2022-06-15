@@ -15,6 +15,7 @@ public class TransactionDynamicFragmentDatesModel {
     }
 
     public TransactionDynamicFragmentDatesModel(){
+
     }
 
     public ArrayList<TransactionDynamicFragmentDateItemsModel> getChildList(){
