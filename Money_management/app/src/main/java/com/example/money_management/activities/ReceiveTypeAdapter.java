@@ -51,6 +51,17 @@ public class ReceiveTypeAdapter extends RecyclerView.Adapter<ReceiveTypeAdapter.
         return Types.size();
     }
 
+    public void clear() {
+        int size = Types.size();
+        if (size > 0) {
+            for (int i = 0; i < size; i++) {
+                Types.remove(0);
+            }
+
+            notifyItemRangeRemoved(0, size);
+        }
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imgView;
         public TextView txtTransaction;

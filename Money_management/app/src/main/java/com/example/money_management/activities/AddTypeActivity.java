@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -59,25 +60,32 @@ public class AddTypeActivity extends AppCompatActivity {
             public  void onClick(View view){
                 String typeName = editextTypeName.getText().toString();
                 String describe = editextDescribe.getText().toString();
-                Float limit = Float.valueOf(editextLimitTransaction.getText().toString());
+                Float limit = 0f;
+                String limitTxt = editextLimitTransaction.getText().toString();
+                if(!limitTxt.matches(""))
+                    limit = Float.valueOf(limitTxt);
                 addSpendingType("", typeName, 100.0F, describe);
+                onBackPressed();
+                finish();
             }
         });
     }
+
 
     // Đưa dữ liệu lên firestore.
     private void addSpendingType(String icon, String typeName, Float limit, String describe){
         Log.i("Tracking Activity Action", "addSpendingType");
 
-
+        SharedPreferences prefs = getSharedPreferences("LoginPreferences", MODE_PRIVATE);
+        String email = prefs.getString("Email", "");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         // Model
         Map<String, Object> spendingType = new HashMap<>();
         spendingType.put("Icon", icon);
         spendingType.put("TypeName", typeName);
         spendingType.put("Limit", limit);
         spendingType.put("Describe", describe);
+        spendingType.put("Email", email);
 
         Log.i("Tracking Activity Action", "Done create model");
         // Thêm vào firestore

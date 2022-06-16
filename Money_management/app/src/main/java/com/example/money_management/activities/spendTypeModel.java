@@ -17,8 +17,6 @@ public class spendTypeModel {
         this.Icon = icon;
     }
 
-
-
     public String getTypeName() {
         return this.TypeName;
     }
