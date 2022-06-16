@@ -200,9 +200,9 @@ public class TransactionDynamicFragment extends Fragment {
     private void setIncomeOutcome(String income, String outcome, String summary){
         String2Currency convert = new String2Currency();
         if(Float.valueOf(summary) >= 0)
-            txtSummary.setTextColor(Color.GREEN);
+            txtSummary.setTextColor(Color.rgb(0, 178, 18));
         else
-            txtSummary.setTextColor(Color.RED);
+            txtSummary.setTextColor(Color.rgb(246, 0,0 ));
         income = convert.convertString2Currency(income);
         outcome = convert.convertString2Currency(outcome);
         summary = convert.convertString2Currency(summary);

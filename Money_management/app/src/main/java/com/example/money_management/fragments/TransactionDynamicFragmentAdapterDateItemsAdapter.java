@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.money_management.R;
 import com.example.money_management.activities.DetailTransactionActivity;
 import com.example.money_management.activities.MainActivity;
+import com.example.money_management.activities.SelectedTransactionActivity;
 import com.example.money_management.activities.SpendTypeActivity;
 import com.example.money_management.activities.String2Currency;
 
@@ -58,9 +59,9 @@ public class TransactionDynamicFragmentAdapterDateItemsAdapter extends RecyclerV
         holder.txtTransactionID.setText(String.valueOf(childItem.ID));
 
         if(childItem.Amount > 0)
-            holder.txtAmount.setTextColor(Color.GREEN);
+            holder.txtAmount.setTextColor(Color.rgb(0, 178, 18));
         if(childItem.Amount < 0)
-            holder.txtAmount.setTextColor(Color.RED);
+            holder.txtAmount.setTextColor(Color.rgb(246, 0, 0));
     }
 
     @Override
@@ -112,7 +113,7 @@ public class TransactionDynamicFragmentAdapterDateItemsAdapter extends RecyclerV
                         editor.putString("AmountHD", (txtAmountHD.getText().toString()));
                         editor.putString("ID", txtTransactionID.getText().toString());
                         editor.commit();
-                        view.getContext().startActivity(new Intent(view.getContext().getApplicationContext(), DetailTransactionActivity.class));
+                        view.getContext().startActivity(new Intent(view.getContext().getApplicationContext(), SelectedTransactionActivity.class));
                     }
                     catch (NullPointerException e){
                         return;

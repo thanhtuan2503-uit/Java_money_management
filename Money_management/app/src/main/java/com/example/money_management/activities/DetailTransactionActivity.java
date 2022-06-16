@@ -79,17 +79,17 @@ public class DetailTransactionActivity extends AppCompatActivity {
         Log.i("Convert!!!", String.valueOf(childModel.Amount));
         childModel.ID = id;
         editextDate.setText(date);
-        editextMoney.setText(amount);
+        editextMoney.setText(amountHD);
         editextTypeName.setText(typeName);
         editextLimit.setText(limit);
         editextSource.setText(source);
         if(type.equals("Chi")) {
-            editextMoney.setTextColor(Color.RED);
-            editextMoney.setText((amountHD).substring(1, (amountHD).length()));
+            editextMoney.setTextColor(Color.rgb(246, 0, 0));
+            editextMoney.setText((amountHD).substring(1));
         }
         else {
-            editextMoney.setTextColor(Color.GREEN);
-            editextMoney.setHintTextColor(Color.GREEN);
+            editextMoney.setTextColor(Color.rgb(0, 178, 18));
+            editextMoney.setHintTextColor(Color.rgb(0, 178, 18));
         }
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override

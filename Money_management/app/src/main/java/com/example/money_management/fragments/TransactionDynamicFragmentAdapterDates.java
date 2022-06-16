@@ -60,9 +60,9 @@ public class TransactionDynamicFragmentAdapterDates extends RecyclerView.Adapter
         holder.txtDate.setText(DateSplit[0]);
         holder.txtDay.setText(getDayOfWeek(parentItem.Date));
         if(parentItem.Amount < 0)
-            holder.txtAmount.setTextColor(Color.RED);
+            holder.txtAmount.setTextColor(Color.rgb(246, 0, 0));
         else
-            holder.txtAmount.setTextColor(Color.GREEN);
+            holder.txtAmount.setTextColor(Color.rgb(0, 178, 18));
         TransactionDynamicFragmentAdapterDateItemsAdapter childAdapter = new TransactionDynamicFragmentAdapterDateItemsAdapter(parentItem.getChildList(), holder.itemView.getContext());
         holder.childRV.setAdapter(childAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(holder.itemView.getContext());
