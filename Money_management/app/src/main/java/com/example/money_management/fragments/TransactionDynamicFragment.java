@@ -82,15 +82,15 @@ public class TransactionDynamicFragment extends Fragment {
     private void addTransactionData2List() {
         Collections.sort(transactionList, (a, b) -> (Integer.valueOf(a.Date.split("/")[0]) < Integer.valueOf(b.Date.split("/")[0])) ? 1 : -1);
         String i = transactionList.get(0).Date;
-        float income = 0f;
-        float outcome= 0f;
-        Float sumAmount = 0f;
+        Integer income = 0;
+        Integer outcome= 0;
+        Integer sumAmount = 0;
         TransactionDynamicFragmentDatesModel parentModel = new TransactionDynamicFragmentDatesModel();
         parentModel.childList = new ArrayList<>();
         ListIterator<TransactionModel> iterate = transactionList.listIterator();
         while(iterate.hasNext()) {
             TransactionModel transaction = iterate.next();
-            Float amount = transaction.Amount;
+            Integer amount = transaction.Amount;
             String fullDay = transaction.Date;
             String typeName = transaction.TypeName;
             String type = transaction.Type;
@@ -106,7 +106,7 @@ public class TransactionDynamicFragment extends Fragment {
                 i = fullDay;
                 parentModel = new TransactionDynamicFragmentDatesModel();
                 parentModel.childList = new ArrayList<>();
-                sumAmount = 0f;
+                sumAmount = 0;
             }
             Log.i("ADD child", "Child Child");
             sumAmount += amount;
@@ -124,7 +124,7 @@ public class TransactionDynamicFragment extends Fragment {
         iterate = transactionList.listIterator();
         while(iterate.hasNext()) {
             TransactionModel transaction = iterate.next();
-            Float amount = transaction.Amount;
+            Integer amount = transaction.Amount;
             String fullDay = transaction.Date;
             String typeName = transaction.TypeName;
             String type = transaction.Type;
@@ -179,7 +179,7 @@ public class TransactionDynamicFragment extends Fragment {
                                 String email = document.getString("Email");
                                 String type = document.getString("Type");
                                 String note = document.getString("Note");
-                                Float amount = Float.valueOf(document.getString("Quantity"));
+                                Integer amount = Integer.valueOf(document.getString("Quantity"));
                                 String source = document.getString("Source");
                                 String typeName = document.getString("TypeName");
                                 String id = document.getId();

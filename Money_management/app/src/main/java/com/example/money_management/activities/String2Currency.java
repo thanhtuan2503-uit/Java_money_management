@@ -9,9 +9,10 @@ public class String2Currency {
 
     }
     public String convertString2Currency(String input){
-        String[] ip = input.split("\\.");
+        String[] ip = new String[1];
+        ip[0] = input;
         if(ip[0].length()<4)
-            return input;
+            return input + "đ";
         String result = "";
         int cnt = 0;
         boolean neg =  false;
@@ -32,7 +33,7 @@ public class String2Currency {
 
         if(neg)
             result = "-" + result;
-        return result + "." + ip[1] + "đ";
+        return result + " VND";
     }
 
 }

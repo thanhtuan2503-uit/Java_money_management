@@ -1,7 +1,7 @@
 package com.example.money_management.fragments;
 
 public class TransactionDynamicFragmentDateItemsModel {
-    public Float Amount;
+    public Integer Amount;
     public String TypeName;
     public String Icon;
     public String Note;
@@ -11,7 +11,7 @@ public class TransactionDynamicFragmentDateItemsModel {
     public String Limit;
     public String Source;
     public String ID;
-    public TransactionDynamicFragmentDateItemsModel(Float amount, String typeName, String icon, String note, String date, String email, String type, String source, String id){
+    public TransactionDynamicFragmentDateItemsModel(Integer amount, String typeName, String icon, String note, String date, String email, String type, String source, String id){
         Amount = amount;
         TypeName = typeName;
         Icon = icon;

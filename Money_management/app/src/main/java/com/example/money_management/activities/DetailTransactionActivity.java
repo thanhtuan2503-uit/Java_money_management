@@ -50,7 +50,6 @@ public class DetailTransactionActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("TransactionDetails", MODE_PRIVATE);
         TransactionDynamicFragmentDateItemsModel childModel = new TransactionDynamicFragmentDateItemsModel();
 
-        String2Currency convert = new String2Currency();
         String email = prefs.getString("Email", "");
         String type = prefs.getString("Type", "");
         String typeName = prefs.getString("TypeName", "");
@@ -64,7 +63,7 @@ public class DetailTransactionActivity extends AppCompatActivity {
         childModel.Type = type;
         childModel.TypeName = typeName;
         childModel.Date = date;
-        childModel.Amount = Float.valueOf((amountHD));
+        childModel.Amount = Integer.valueOf((amountHD));
         Log.i("Convert!!!", String.valueOf(childModel.Amount));
         childModel.ID = id;
         editextDate.setText(date);
@@ -91,7 +90,7 @@ public class DetailTransactionActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Hãy nhập ngày với định dạng Ngày/Tháng/Năm", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                childModel.Amount = Float.valueOf(editextMoney.getText().toString());
+                childModel.Amount = Integer.valueOf(editextMoney.getText().toString());
                 childModel.Date = editextDate.getText().toString();
                 checkAccountExist(childModel);
             }

@@ -108,7 +108,7 @@ public class TransactionDynamicFragmentAdapterDateItemsAdapter extends RecyclerV
                         editor.putString("TypeName", txtTransaction.getText().toString());
                         editor.putString("Email", txtEmailHidden.getText().toString());
                         editor.putString("Date", txtDateHidden.getText().toString());
-                        editor.putString("Amount", cv.convertString2Currency(txtAmount.getText().toString()));
+                        editor.putString("Amount", txtAmount.getText().toString());
                         editor.putString("AmountHD", (txtAmountHD.getText().toString()));
                         editor.putString("ID", txtTransactionID.getText().toString());
                         editor.commit();

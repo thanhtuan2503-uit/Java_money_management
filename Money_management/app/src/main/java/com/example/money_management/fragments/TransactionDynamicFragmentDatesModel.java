@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class TransactionDynamicFragmentDatesModel {
     public String Date;
-    public Float Amount;
+    public Integer Amount;
     public ArrayList<TransactionDynamicFragmentDateItemsModel> childList;
 
-    public TransactionDynamicFragmentDatesModel(String date, Float amount, ArrayList<TransactionDynamicFragmentDateItemsModel> childlist){
+    public TransactionDynamicFragmentDatesModel(String date, Integer amount, ArrayList<TransactionDynamicFragmentDateItemsModel> childlist){
         Date = date;
         Amount = amount;
         childList = childlist;

@@ -4,12 +4,12 @@ public class TransactionModel {
     public String Email;
     public String Date;
     public String Note;
-    public Float Amount;
+    public Integer Amount;
     public String Source;
     public String Type;
     public String TypeName;
     public String ID;
-    public TransactionModel(String email, String date, String note, Float amount, String source, String type, String typeName, String id){
+    public TransactionModel(String email, String date, String note, Integer amount, String source, String type, String typeName, String id){
         Email = email;
         Date = date;
         Note = note;
