@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,7 +34,7 @@ public class AccountInformationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_information);
-        Log.i("Tracking Activity Created", "AccountInformationActivity");
+        //Log.i("Tracking Activity Created", "AccountInformationActivity");
         mapping();
         sharedpreferences = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE); // Lay thong tin dang nhap
         String email = sharedpreferences.getString("Email", null);
@@ -87,7 +86,7 @@ public class AccountInformationActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             //Lấy dữ liệu user từ firebase
                             if(task.isSuccessful()){
-                                Log.d(thisTag, "Thành công lấy dữ liệu từ filestore", task.getException());
+                                //Log.d(thisTag, "Thành công lấy dữ liệu từ filestore", task.getException());
                                 for(QueryDocumentSnapshot document : task.getResult()){
                                     txtUserName.setText(document.getString("Username"));
                                     txtUserEmail.setText(document.getString("Email"));
@@ -103,7 +102,7 @@ public class AccountInformationActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.i("Reload data user", "AccountInformationActivity");
+        //Log.i("Reload data user", "AccountInformationActivity");
         //syncUserWithFirebase();
     }
 

@@ -126,6 +126,13 @@ public class LoginActivity extends AppCompatActivity {
                 }, email);
             }
         });
+        txtViewForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this,ForgetPasswordActivity.class));
+                finish();
+            }
+        });
 
         btnGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,7 +161,7 @@ public class LoginActivity extends AppCompatActivity {
         return email.isEmpty() || password.isEmpty();
     }
 
-    // Kiểm tra trên firebase nếu tài khoản có tồn tại và kiểm trả mật khẩu
+    // Kiểm tra trên firebase nếu tài khoản có tồn tại và kiểm tra mật khẩu
     private void checkAccountExist(EmailCallback emailCallback, String email){
         Log.d(thisTag, "Tiến hành kiểm tra thông tin trên firebase");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
