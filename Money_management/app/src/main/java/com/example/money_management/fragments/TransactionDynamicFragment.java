@@ -1,6 +1,7 @@
 package com.example.money_management.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,7 +26,10 @@ import com.example.money_management.activities.SpendTypeAdapter;
 import com.example.money_management.activities.String2Currency;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
@@ -39,6 +43,7 @@ import java.util.ListIterator;
 
 public class TransactionDynamicFragment extends Fragment {
     private View mView;
+    private TransactionDynamicFragment This;
     private RecyclerView parentRecyclerView;
     private ArrayList<TransactionDynamicFragmentDatesModel> parentList;
     private ArrayList<TransactionModel> transactionList = new ArrayList<>();
@@ -53,6 +58,7 @@ public class TransactionDynamicFragment extends Fragment {
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         mView= inflater.inflate(R.layout.fragment_dynamic_transaction, container, false);
+        This = this;
         mapping();
         FirstShow = true;
 //        btnChoose.setOnClickListener(new View.OnClickListener() {
@@ -67,10 +73,13 @@ public class TransactionDynamicFragment extends Fragment {
 
     public void onViewCreated(View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
+        Integer month = getArguments().getInt("Month", 1);
+        Integer year = getArguments().getInt("Year", 2022);
+        Log.i("Month + Year", " " + month + "  " + year);
         parentRecyclerView = mView.findViewById(R.id.rv_transaction_fragment_parent);
         parentList = new ArrayList<>();
         transactionList = new ArrayList<>();
-        getTransactionData(6);
+        getTransactionData(month, year);
 
         parentAdapter = new TransactionDynamicFragmentAdapterDates(parentList, v.getContext());
         parentRecyclerView.setAdapter(parentAdapter);
@@ -80,6 +89,8 @@ public class TransactionDynamicFragment extends Fragment {
     }
 
     private void addTransactionData2List() {
+        if(transactionList.size() == 0)
+            return;
         Collections.sort(transactionList, (a, b) -> (Integer.valueOf(a.Date.split("/")[0]) < Integer.valueOf(b.Date.split("/")[0])) ? 1 : -1);
         String i = transactionList.get(0).Date;
         Integer income = 0;
@@ -145,15 +156,17 @@ public class TransactionDynamicFragment extends Fragment {
         parentList.clear();
         parentAdapter.clear();
         transactionList.clear();
-        getTransactionData(6);
+        Integer month = getArguments().getInt("Month", 1);
+        Integer year =  getArguments().getInt("Year", 2022);
+        getTransactionData(month, year);
+        Log.i("Month + Year", " " + month + "  " + year);
         parentAdapter.notifyDataSetChanged();
     }
 
 
-    private void getTransactionData(int MonthFilter) {
-        SharedPreferences sharedpreferences = this.getActivity().getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
+    public void getTransactionData(int MonthFilter, int YearFilter) {
+        SharedPreferences sharedpreferences = getActivity().getApplicationContext().getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
         String logged_Email = sharedpreferences.getString("Email", null);
-
         Log.d(thisTag, "Tiến hành kiểm tra thông tin trên firebase");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Transactions")
@@ -171,6 +184,8 @@ public class TransactionDynamicFragment extends Fragment {
                                     continue;
                                 try {
                                     if(Integer.valueOf(dateSplit[1]) != MonthFilter)
+                                        continue;
+                                    if(Integer.valueOf(dateSplit[2]) != YearFilter)
                                         continue;
                                 }catch(ArrayIndexOutOfBoundsException e){
                                      continue;
@@ -209,6 +224,66 @@ public class TransactionDynamicFragment extends Fragment {
         txtIncome.setText(income);
         txtOutcome.setText(outcome);
         txtSummary.setText(summary);
+        sumSourceAmount();
+    }
+
+    private void sumSourceAmount(){
+        SharedPreferences sharedpreferences = getActivity().getApplicationContext().getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
+        String logged_Email = sharedpreferences.getString("Email", null);
+        Log.d(thisTag, "Tiến hành kiểm tra thông tin trên firebase");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Transactions")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        Integer income = 0;
+                        Integer outcome = 0;
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String email = document.getString("Email");
+                                String type = document.getString("Type");
+                                Integer amount = Integer.valueOf(document.getString("Quantity"));
+                                if(email == null) continue;
+                                if(!email.equals(logged_Email))
+                                    continue;
+                                if(type.equals("Thu"))
+                                    income += amount;
+                                else
+                                    outcome += amount;
+                                Log.i("Dữ liệu từ firestore", email);
+                            }
+                            push2FireStoreSumAmount(income, outcome);
+                        }
+                    }
+
+                });
+    }
+
+    private void push2FireStoreSumAmount(Integer income, Integer outcome){
+        SharedPreferences sharedpreferences = mView.getContext().getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE); // Chọn file có tên "LoginPreferences"
+        String logged_Email = sharedpreferences.getString("Email", "");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference usersRef = db.collection("MoneySource");
+        Query query = usersRef.whereEqualTo("Email", logged_Email);
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot documentsnap : task.getResult()) {
+                        String email = documentsnap.getString("Email");
+                        if(!email.equals(logged_Email))
+                            continue;
+                        db.collection("MoneySource").document(documentsnap.getId()).update("Amount", String.valueOf(income - outcome));
+                        break;
+                    }
+                }else{
+                    Log.d(thisTag, "Không thành công lấy dữ liệu từ filestore", task.getException());
+                }
+                TransactionFragment parentFrag = ((TransactionFragment) This.getParentFragment());
+                parentFrag.updateMoneyAmount();
+            }
+        });
     }
 
     private void mapping() {

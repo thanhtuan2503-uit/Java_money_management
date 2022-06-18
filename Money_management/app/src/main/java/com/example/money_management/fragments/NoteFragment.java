@@ -31,6 +31,7 @@ public class NoteFragment extends Fragment {
                 viewPager2,
                 (tab, position) -> {
                     tab.setText(tabName[position]);
+
                 }
         ).attach();
         return mView;
