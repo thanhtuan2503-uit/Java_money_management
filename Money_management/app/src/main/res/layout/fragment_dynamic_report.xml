@@ -77,7 +77,8 @@
                 android:text="1,300,000"
                 android:textSize="15sp"
                 android:textColor="@color/black"
-                android:gravity="right"/>
+                android:gravity="right"
+                android:layout_marginRight="10dp"/>
         </TableRow>
 
         <View
@@ -113,7 +114,8 @@
                 android:text="+7,000,000"
                 android:textSize="15sp"
                 android:textColor="@color/black"
-                android:gravity="right"/>
+                android:gravity="right"
+                android:layout_marginRight="10dp"/>
         </TableRow>
 
         <View
@@ -149,7 +151,8 @@
                 android:text="-5,700,100"
                 android:textSize="15sp"
                 android:textColor="@color/black"
-                android:gravity="right"/>
+                android:gravity="right"
+                android:layout_marginRight="10dp"/>
         </TableRow>
         <View
             android:layout_height="2dip"
