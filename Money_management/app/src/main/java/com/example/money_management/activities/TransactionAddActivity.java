@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,6 +67,10 @@ public class TransactionAddActivity extends AppCompatActivity {
                     formatter.parse(editTextDate.getText().toString());
                 } catch (ParseException e) {
                     Toast.makeText(getBaseContext(), "Hãy nhập ngày với định dạng Ngày/Tháng/Năm", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(Integer.valueOf(editextMoney.getText().toString()) <= 0){
+                    Toast.makeText(getBaseContext(), "Hãy nhập số tiền lớn hơn 0", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

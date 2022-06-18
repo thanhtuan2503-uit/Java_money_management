@@ -184,7 +184,12 @@ public class TransactionDynamicFragment extends Fragment {
                                 String email = document.getString("Email");
                                 String type = document.getString("Type");
                                 String note = document.getString("Note");
-                                Integer amount = Integer.valueOf(document.getString("Quantity"));
+                                Integer amount = 0;
+                                try {
+                                    amount = Integer.valueOf(document.getString("Quantity"));
+                                }catch (NumberFormatException e){
+                                    amount = 0;
+                                }
                                 String source = document.getString("Source");
                                 String typeName = document.getString("TypeName");
                                 String id = document.getId();
@@ -233,7 +238,13 @@ public class TransactionDynamicFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 String email = document.getString("Email");
                                 String type = document.getString("Type");
-                                Integer amount = Integer.valueOf(document.getString("Quantity"));
+                                Integer amount = 0;
+                                try {
+                                    amount = Integer.valueOf(document.getString("Quantity"));
+                                }catch (NumberFormatException e){
+                                    amount = 0;
+                                }
+
                                 if(email == null) continue;
                                 if(!email.equals(logged_Email))
                                     continue;

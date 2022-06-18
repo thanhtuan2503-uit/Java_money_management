@@ -123,7 +123,7 @@ public class DetailTransactionActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(DetailTransactionActivity.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-                        dateTxt.setText(date+"-"+month+"-"+year);
+                        dateTxt.setText(date+"/"+month+"/"+year);
                     }
                 },mYear, mMonth, mDate);
                 datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()-1000);
@@ -158,13 +158,19 @@ public class DetailTransactionActivity extends AppCompatActivity {
                         Log.i("YESSS FOUND!", "!!!" + documentsnap.getId() + " " + childModel.ID);
                         if(!documentsnap.getId().equals(childModel.ID))
                             continue;
-                        String email = documentsnap.getString("Email");
-                        String type = documentsnap.getString("Type");
-                        String date = documentsnap.getString("Date");
-                        Float amount = Float.valueOf(documentsnap.getString("Quantity"));
+
+                        Integer amount;
+                        try{
+                            amount = Integer.valueOf(documentsnap.getString("Quantity"));
+                        }
+                        catch (NumberFormatException e){
+                            amount = 0;
+                        }
+
                         String typeName = documentsnap.getString("TypeName");
                         db.collection("Transactions").document(documentsnap.getId()).update("Quantity", String.valueOf(childModel.Amount));
                         db.collection("Transactions").document(documentsnap.getId()).update("Date", childModel.Date);
+                        db.collection("Transactions").document(documentsnap.getId()).update("Note", editextNote.getText().toString());
                         break;
                     }
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
