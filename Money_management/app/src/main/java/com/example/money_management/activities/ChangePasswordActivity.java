@@ -1,9 +1,5 @@
 package com.example.money_management.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +10,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.money_management.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,8 +27,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ChangePasswordActivity extends AppCompatActivity {
     private ImageView btnBack;
@@ -47,7 +45,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
         mapping();
-        Log.i("Tracking Activity Created", "ChangePasswordActivity");
+        //Log.i("Tracking Activity Created", "ChangePasswordActivity");
         sharedpreferences = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE); // Chọn file có tên "LoginPreferences" chứa email
 
 
@@ -77,7 +75,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         public void isEmailExist(boolean exist, String remotePassword) {
                             if (exist) {  // Tài khoản tồn tại
                                 if (md5(enteredCurrentPassword).equals(remotePassword)) { // Đúng password
-                                    Log.d(thisTag, "Đổi mật khẩu thành công thành công" + "  " + enteredNewPassword + "   " + remotePassword + "   " + md5(enteredNewPassword));
+                                    //Log.d(thisTag, "Đổi mật khẩu thành công thành công" + "  " + enteredNewPassword + "   " + remotePassword + "   " + md5(enteredNewPassword));
                                     
                                     // Cập nhật mật khẩu lên firestore
                                     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -87,7 +85,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                             if (task.isSuccessful()) {
-                                                Log.d(thisTag, "Thành công lấy dữ liệu từ filestore", task.getException());
+                                                //Log.d(thisTag, "Thành công lấy dữ liệu từ filestore", task.getException());
                                                 String remotePassword = md5(md5(email));
                                                 for (DocumentSnapshot documentsnap : task.getResult()) {
                                                     String account = documentsnap.getString("Username");
@@ -107,14 +105,14 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                     alertDialog.setTitle("Sai mật khẩu");
                                     alertDialog.setMessage(("Hãy kiểm tra lại thông tin"));
                                     alertDialog.show();
-                                    Log.d(thisTag, "Sai mật khẩu");
+                                    //Log.d(thisTag, "Sai mật khẩu");
                                 }
                             } else { // Không tồn tại tài khoản
                                 AlertDialog alertDialog = new AlertDialog.Builder(ChangePasswordActivity.this).create();
                                 alertDialog.setTitle("Tài khoản không tồn tại");
                                 alertDialog.setMessage(("Hãy kiểm tra lại thông tin"));
                                 alertDialog.show();
-                                Log.d(thisTag, "Không tồn tại tài khoản");
+                               // Log.d(thisTag, "Không tồn tại tài khoản");
                             }
                         }
                     }, email);

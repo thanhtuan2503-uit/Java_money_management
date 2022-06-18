@@ -1,21 +1,17 @@
 package com.example.money_management.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.cardview.widget.CardView;
-
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.money_management.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -70,16 +66,16 @@ public class ChangeNameActivity extends AppCompatActivity {
         // Cập nhật tên lên firestore
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference usersRef = db.collection("Accounts");
-        Query query = usersRef.whereEqualTo("Username", email);
+        Query query = usersRef.whereEqualTo("Email", email);
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     Log.d(thisTag, "Thành công lấy dữ liệu từ filestore", task.getException());
                     for (DocumentSnapshot documentsnap : task.getResult()) {
-                        String account = documentsnap.getString("Username");
+                        String account = documentsnap.getString("Email");
                         if (account.equals(email)) {
-                            db.collection("Accounts").document(documentsnap.getId()).update("Name", newName);
+                            db.collection("Accounts").document(documentsnap.getId()).update("Username", newName);
                             Log.d(thisTag, "Thành công đổi tên" + "    "  + documentsnap.getId(), task.getException());
                             return;
                         }

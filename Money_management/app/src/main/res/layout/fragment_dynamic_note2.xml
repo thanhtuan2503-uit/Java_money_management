@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.Note2DynamicFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:elevation="20dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/transaction_layout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="0dp"
+                        android:stretchColumns="*">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center">
+
+                            <RelativeLayout android:gravity="center">
+
+                                <TextView
+                                    android:id="@+id/transaction_id2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_marginStart="20dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:text="1"
+                                    android:textColor="#000000"
+                                    android:textSize="45sp" />
+
+                                <TextView
+                                    android:id="@+id/transaction_day2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_toEndOf="@+id/transaction_id2"
+                                    android:layout_toRightOf="@+id/transaction_id2"
+                                    android:text="Thứ ba"
+                                    android:textAppearance="@style/user_infor" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/transaction_day2"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_toEndOf="@+id/transaction_id2"
+                                    android:layout_toRightOf="@+id/transaction_id2"
+                                    android:text=" tháng 2 2022"
+                                    android:textColor="#747373" />
+                            </RelativeLayout>
+
+                            <TextView
+                                android:layout_marginEnd="15dp"
+                                android:gravity="right"
+                                android:text="+190,000"
+                                android:textColor="#000000"
+                                android:textStyle="bold"
+                                android:textSize="17dp" />
+                        </TableRow>
+
+                        <View
+                            android:layout_height="2dip"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:background="#CDCDCD" />
+
+                        <TableRow
+                            android:id="@+id/btn_choose1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginTop="10dp"
+                            android:background="#7AFF0000">
+
+                            <RelativeLayout>
+
+                                <ImageView
+                                    android:id="@+id/note_pic11"
+                                    android:layout_width="40sp"
+                                    android:layout_height="40sp"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:background="@drawable/ic_baseline_movie_filter_24" />
+
+                                <TextView
+                                    android:id="@+id/txt11"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_toEndOf="@+id/note_pic11"
+                                    android:layout_toRightOf="@+id/note_pic11"
+                                    android:text="Xem phim"
+                                    android:textAppearance="@style/user_infor" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/txt11"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_toEndOf="@+id/note_pic11"
+                                    android:layout_toRightOf="@+id/note_pic11"
+                                    android:text="Người nợ: Bình An"
+                                    android:textAppearance="@style/user_infor"
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:id="@+id/txt31"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginStart="175dp"
+                                    android:layout_marginTop="15dp"
+                                    android:layout_marginEnd="20dp"
+                                    android:layout_toEndOf="@+id/note_pic11"
+                                    android:gravity="right"
+                                    android:text="Chưa thu"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout>
+
+                                <TextView
+                                    android:id="@+id/txt41"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginTop="15dp"
+                                    android:gravity="right"
+                                    android:text="55,000"
+                                    android:textColor="@color/black"
+                                    android:textSize="17sp" />
+
+                            </RelativeLayout>
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/btn_choose12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginTop="10dp"
+                            android:background="#7AFF0000">
+
+                            <RelativeLayout>
+
+                                <ImageView
+                                    android:id="@+id/note_pic12"
+                                    android:layout_width="40sp"
+                                    android:layout_height="40sp"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:background="@drawable/ic_baseline_movie_filter_24" />
+
+                                <TextView
+                                    android:id="@+id/txt12"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_toEndOf="@+id/note_pic12"
+                                    android:layout_toRightOf="@+id/note_pic12"
+                                    android:text="Xem phim"
+                                    android:textAppearance="@style/user_infor" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/txt12"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_toEndOf="@+id/note_pic12"
+                                    android:layout_toRightOf="@+id/note_pic12"
+                                    android:text="Người nợ: Bình An"
+                                    android:textAppearance="@style/user_infor"
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:id="@+id/txt13"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginStart="175dp"
+                                    android:layout_marginTop="15dp"
+                                    android:layout_toEndOf="@+id/note_pic12"
+                                    android:gravity="right"
+                                    android:text="Chưa thu"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout>
+
+                                <TextView
+                                    android:id="@+id/txt14"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginTop="15dp"
+                                    android:layout_marginEnd="40dp"
+                                    android:gravity="right"
+                                    android:text="55,000"
+                                    android:textColor="@color/black"
+                                    android:textSize="17sp" />
+
+                            </RelativeLayout>
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/btn_choose"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginTop="10dp"
+                            android:background="#4D00B212">
+
+
+                            <RelativeLayout>
+
+                                <ImageView
+                                    android:id="@+id/note_pic1"
+                                    android:layout_width="40sp"
+                                    android:layout_height="40sp"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:background="@drawable/ic_baseline_movie_filter_24" />
+
+                                <TextView
+                                    android:id="@+id/txt1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_toEndOf="@+id/note_pic1"
+                                    android:layout_toRightOf="@+id/note_pic1"
+                                    android:text="Xem phim"
+                                    android:textAppearance="@style/user_infor" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/txt1"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_toEndOf="@+id/note_pic1"
+                                    android:layout_toRightOf="@+id/note_pic1"
+                                    android:text="Người nợ: Bình An"
+                                    android:textAppearance="@style/user_infor"
+                                    android:textSize="15sp" />
+
+                                <TextView
+                                    android:id="@+id/txt3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_marginStart="175dp"
+                                    android:layout_marginTop="15dp"
+                                    android:layout_marginEnd="22dp"
+                                    android:layout_toEndOf="@+id/note_pic1"
+                                    android:gravity="right"
+                                    android:text="Đã thu"
+                                    android:textColor="@color/black"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout>
+
+
+                                <TextView
+                                    android:id="@+id/txt4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginTop="15dp"
+                                    android:layout_marginEnd="40dp"
+                                    android:gravity="right"
+                                    android:text="55,000"
+                                    android:textColor="@color/black"
+                                    android:textSize="17sp" />
+
+                            </RelativeLayout>
+                        </TableRow>
+                        <View
+                            android:layout_marginTop="20dp" />
+                    </TableLayout>
+                </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</ScrollView>

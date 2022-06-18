@@ -13,10 +13,10 @@ public class FragmentNoteAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position){
-            case 0: return new NoteDynamicFragment();
-            case 1: return new Note2DynamicFragment();
+            case 0: return new Note2DynamicFragment();
+            case 1: return new NoteDynamicFragment();
         }
-        return new NoteDynamicFragment();
+        return new Note2DynamicFragment();
     }
 
     @Override

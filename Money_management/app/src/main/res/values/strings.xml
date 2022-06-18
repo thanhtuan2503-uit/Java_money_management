@@ -42,5 +42,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="eat"><u>Ăn uống</u></string>
+    <string name="register"><u>Đăng ký</u></string>
+    <string name="fogetpassword"><u>Quên mật khẩu?</u></string>
+    <string name="login"><u>Đăng nhập</u></string>
 
 </resources>
