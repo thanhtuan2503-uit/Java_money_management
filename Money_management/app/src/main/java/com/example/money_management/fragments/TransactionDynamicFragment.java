@@ -109,7 +109,7 @@ public class TransactionDynamicFragment extends Fragment {
                 parentModel.childList = new ArrayList<>();
                 sumAmount = 0;
             }
-            Log.i("ADD child", "Child Child");
+            Log.i("Thêm con", "Child Child");
             sumAmount += amount;
             parentModel.childList.add(new TransactionDynamicFragmentDateItemsModel(amount, typeName, type, note, fullDay, transaction.Email, type, transaction.Source, id));
             if(!iterate.hasNext()) {
@@ -156,7 +156,7 @@ public class TransactionDynamicFragment extends Fragment {
 
     public void getTransactionData(int MonthFilter, int YearFilter) {
         SharedPreferences sharedpreferences = getActivity().getApplicationContext().getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
-        String logged_Email = sharedpreferences.getString("Email", null);
+        String logged_Email = sharedpreferences.getString("Email", "");
         Log.d(thisTag, "Tiến hành kiểm tra thông tin trên firebase");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Transactions")
@@ -177,8 +177,8 @@ public class TransactionDynamicFragment extends Fragment {
                                         continue;
                                     if(Integer.valueOf(dateSplit[2]) != YearFilter)
                                         continue;
-                                }catch(ArrayIndexOutOfBoundsException e){
-                                     continue;
+                                }catch(ArrayIndexOutOfBoundsException e) {
+                                    continue;
                                 }
 
                                 String email = document.getString("Email");
@@ -188,10 +188,10 @@ public class TransactionDynamicFragment extends Fragment {
                                 String source = document.getString("Source");
                                 String typeName = document.getString("TypeName");
                                 String id = document.getId();
-                                // Lấy dữ liệu của tài khoản này.
-//                                if(!email.equals(logged_Email))
-//                                    continue;
+
                                 if(email == null) continue;
+                                if(!email.equals(logged_Email))
+                                    continue;
                                 Log.i("Dữ liệu từ firestore", email);
                                 // Filter
                                 transactionList.add(new TransactionModel(email, date, note, amount, source, type, typeName, id));

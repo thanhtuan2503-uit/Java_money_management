@@ -46,7 +46,7 @@ public class DetailTransactionActivity extends AppCompatActivity {
     private int mDate, mMonth, mYear;
     private EditText editextMoney;
     private EditText editextDate;
-    private EditText editextSource;
+    private EditText editextNote;
     private EditText editextLimit;
     private TextView editextTypeName;
     private TextInputLayout TextInputLayout;
@@ -68,7 +68,7 @@ public class DetailTransactionActivity extends AppCompatActivity {
         String date = prefs.getString("Date", "");
         String amount = prefs.getString("Amount", "");
         String amountHD = prefs.getString("AmountHD", "");
-        String source = prefs.getString("Source", "");
+        String note = prefs.getString("Note", "");
         String limit = prefs.getString("Limit", "");
         String id = prefs.getString("ID", "");
         childModel.Email = email;
@@ -82,7 +82,7 @@ public class DetailTransactionActivity extends AppCompatActivity {
         editextMoney.setText(amountHD);
         editextTypeName.setText(typeName);
         editextLimit.setText(limit);
-        editextSource.setText(source);
+        editextNote.setText(note);
         if(type.equals("Chi")) {
             editextMoney.setTextColor(Color.rgb(246, 0, 0));
             editextMoney.setText((amountHD).substring(1));
@@ -139,7 +139,7 @@ public class DetailTransactionActivity extends AppCompatActivity {
         dateTxt = findViewById(R.id.editext_date);
         editextMoney = findViewById(R.id.editext_money);
         editextDate = findViewById(R.id.editext_date);
-        editextSource = findViewById(R.id.editext_source_money);
+        editextNote = findViewById(R.id.editext_note_money);
         editextLimit = findViewById(R.id.edittext_1);
         editextTypeName = findViewById(R.id.txt_choose_spending);
         TextInputLayout = findViewById(R.id.money_layout);

@@ -1,7 +1,9 @@
 package com.example.money_management.activities;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -97,6 +99,20 @@ public class RegisterActivity extends AppCompatActivity {
                             Log.d(thisTag, "Không tồn tại tài khoản");
                             // Kiểm tra password và passowrd nhập lại có giống không
                             if(password.equals(confirmpassword)) {// Giống password
+                                SharedPreferences sharedpreferences = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE); // Chọn file có tên "LoginPreferences"
+                                SharedPreferences.Editor editor = sharedpreferences.edit(); // Lưu trạng thái đăng nhập
+                                editor.putString("Email", email);
+                                editor.commit();
+                                createMoneySource(email);
+                                createIncomeOutcomeType(email, "Ăn uống", "Lương");
+                                createIncomeOutcomeType(email, "Di chuyển", "Hốt hụi");
+                                createIncomeOutcomeType(email, "Hẹn hò", "");
+                                createIncomeOutcomeType(email, "Gia đình", "");
+                                createIncomeOutcomeType(email, "Dụng cụ học tập", "");
+                                createIncomeOutcomeType(email, "Đồ dùng bếp", "");
+                                createIncomeOutcomeType(email, "Mỹ phẩm", "");
+                                createIncomeOutcomeType(email, "Sữa tắm", "");
+                                createIncomeOutcomeType(email, "Giải trí", "");
                                 createAccount(email, md5(password)); // Tạo tài khoản trên firestore
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));  // Mở trang chủ
                             }
@@ -123,6 +139,79 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void createMoneySource(String email){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        Map<String, Object> account = new HashMap<>();
+        account.put("Email", email);
+        account.put("Amount", "0");
+        account.put("SourceName", "Tiền Mặt");
+
+        db.collection("MoneySource")
+                .add(account)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(thisTag, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(thisTag, "Error adding document", e);
+                    }
+                });
+    }
+
+    private void createIncomeOutcomeType(String email, String ocTypeName, String icTypeName){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Map<String, Object> income = new HashMap<>();
+        income.put("Describe", "");
+        income.put("Email", email);
+        income.put("Icon", "");
+        income.put("Limit", 100.0F);
+        income.put("TypeName", icTypeName);
+
+        Map<String, Object> outcome = new HashMap<>();
+        outcome.put("Describe", "");
+        outcome.put("Email", email);
+        outcome.put("Icon", "");
+        outcome.put("Limit", 100.0F);
+        outcome.put("TypeName", ocTypeName);
+
+        if(!icTypeName.equals(""))
+        db.collection("IncomeType")
+                .add(income)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(thisTag, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(thisTag, "Error adding document", e);
+                    }
+                });
+
+        if(!ocTypeName.equals(""))
+        db.collection("SpendingType")
+                .add(outcome)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(thisTag, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(thisTag, "Error adding document", e);
+                    }
+                });
     }
 
     // Kiểm tra nội dung người dùng nhập có phải là email không.

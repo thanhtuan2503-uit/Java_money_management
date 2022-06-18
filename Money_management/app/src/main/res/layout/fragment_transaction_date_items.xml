@@ -38,6 +38,11 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"/>
             <TextView
+                android:id="@+id/transaction_Note_HD"
+                android:text="Type"
+                android:layout_width="0dp"
+                android:layout_height="0dp"/>
+            <TextView
                 android:id="@+id/transaction_ID_HD"
                 android:text="ID"
                 android:layout_width="0dp"

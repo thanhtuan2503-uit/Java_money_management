@@ -64,7 +64,15 @@ public class AddTypeActivity extends AppCompatActivity {
                 String limitTxt = editextLimitTransaction.getText().toString();
                 if(!limitTxt.matches(""))
                     limit = Float.valueOf(limitTxt);
-                addSpendingType("", typeName, 100.0F, describe);
+                sharedpreferences = getSharedPreferences("Selected Transaction Pre-Type", Context.MODE_PRIVATE);
+                String TypeOrIncome = sharedpreferences.getString("Selected Transaction Pre-Type", "");
+                if(TypeOrIncome.equals(""))
+                    return;
+                if(TypeOrIncome.equals("Red"))
+                    addSpendingType("", typeName, 100.0F, describe);
+                if(TypeOrIncome.equals("Green"))
+                    addIncomeType("", typeName, 100.0F, describe);
+                Log.i("TypeChoose", TypeOrIncome);
                 onBackPressed();
                 finish();
             }
@@ -91,6 +99,40 @@ public class AddTypeActivity extends AppCompatActivity {
         // Thêm vào firestore
         db.collection("SpendingType")
                 .add(spendingType)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.i(thisTag, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Log.i("Tracking Activity Action", "Done addSpendingType");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i(thisTag, "Error adding document", e);
+                        Log.i("Tracking Activity Action", "Failed addSpendingType");
+                    }
+                });
+    }
+
+    private void addIncomeType(String icon, String typeName, Float limit, String describe){
+        Log.i("Tracking Activity Action", "addIncomeType");
+
+        SharedPreferences prefs = getSharedPreferences("LoginPreferences", MODE_PRIVATE);
+        String email = prefs.getString("Email", "");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        // Model
+        Map<String, Object> incomeType = new HashMap<>();
+        incomeType.put("Icon", icon);
+        incomeType.put("TypeName", typeName);
+        incomeType.put("Limit", limit);
+        incomeType.put("Describe", describe);
+        incomeType.put("Email", email);
+
+        Log.i("Tracking Activity Action", "Done create model");
+        // Thêm vào firestore
+        db.collection("IncomeType")
+                .add(incomeType)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {

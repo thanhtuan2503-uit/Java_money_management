@@ -30,20 +30,22 @@ public class ChooseSpendingActivity extends AppCompatActivity {
         btnTypesOfTaxes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sharedpreferences = view.getContext().getSharedPreferences("Selected Transaction Pre-Type", Context.MODE_PRIVATE);
+                sharedpreferences = getSharedPreferences("Selected Transaction Pre-Type", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.putString("Selected Transaction Pre-Type", "Red");
+                editor.putString("Selected Transaction Pre-Type", "Green");
                 editor.commit();
+                Log.i("TypeChoose", "Green");
                 startActivity(new Intent(getApplicationContext(), ReceiveTypeActivity.class));
             }
         });
         btnTypesOfGenera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sharedpreferences = view.getContext().getSharedPreferences("Selected Transaction Type", Context.MODE_PRIVATE);
+                sharedpreferences = getSharedPreferences("Selected Transaction Pre-Type", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.putString("Selected Transaction Pre-Type", "Green");
+                editor.putString("Selected Transaction Pre-Type", "Red");
                 editor.commit();
+                Log.i("TypeChoose", "Red");
                 startActivity(new Intent(getApplicationContext(), SpendTypeActivity.class));
             }
         });

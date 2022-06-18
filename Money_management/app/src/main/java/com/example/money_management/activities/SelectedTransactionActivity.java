@@ -55,18 +55,21 @@ public class SelectedTransactionActivity extends AppCompatActivity {
         String source = prefs.getString("Source", "");
         String limit = prefs.getString("Limit", "");
         String id = prefs.getString("ID", "");
+        String note = prefs.getString("Note", "");
         childModel.Email = email;
         childModel.Type = type;
         childModel.TypeName = typeName;
         childModel.Date = date;
         childModel.Amount = Integer.valueOf((amountHD));
         childModel.ID = id;
+        childModel.Note = note;
         String2Currency convert = new String2Currency();
         txtDate.setText(getDayOfWeek(date) + " " + date);
         txtAmount.setText(convert.convertString2Currency(amountHD));
         txtTypeName.setText(typeName);
         txtLimit.setText(limit);
-        txtMoneySource.setText(source);
+        txtMoneySource.setText(note);
+        Log.i("Note", note);
         if(type.equals("Chi")) {
             txtAmount.setTextColor(Color.rgb(246, 0, 0));
             txtAmount.setText(convert.convertString2Currency((amountHD)).substring(1));
@@ -101,6 +104,10 @@ public class SelectedTransactionActivity extends AppCompatActivity {
         });
     }
 
+    private void getNote(String email, String ID){
+
+    }
+
     private void deleteItem(TransactionDynamicFragmentDateItemsModel childModel){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Transactions").document(childModel.ID)
@@ -121,7 +128,7 @@ public class SelectedTransactionActivity extends AppCompatActivity {
         txtTypeName = findViewById(R.id.selected_TypeName);
         txtAmount = findViewById(R.id.selected_Amount);
         txtDate = findViewById(R.id.selected_Date);
-        txtMoneySource = findViewById(R.id.selected_MoneySource);
+        txtMoneySource = findViewById(R.id.selected_Note);
         txtLimit = findViewById(R.id.selected_Limit);
     }
 

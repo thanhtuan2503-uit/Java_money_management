@@ -95,6 +95,8 @@ public class SpendTypeActivity extends AppCompatActivity {
     }
 
     private void getSpendingTypeData() {
+        SharedPreferences sharedpreferences = getApplicationContext().getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
+        String logged_Email = sharedpreferences.getString("Email", "");
         Log.d(thisTag, "Tiến hành kiểm tra thông tin trên firebase");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("SpendingType")
@@ -104,6 +106,11 @@ public class SpendTypeActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                String email = document.getString("Email");
+                                if(email == null)
+                                    continue;
+                                if(!email.equals(logged_Email))
+                                    continue;
                                 String typeName = document.getString("TypeName");
                                 String icon = document.getString("Icon");
                                 listitem.add(new spendTypeModel(typeName, icon));

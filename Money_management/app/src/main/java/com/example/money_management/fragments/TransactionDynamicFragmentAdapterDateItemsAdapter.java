@@ -57,6 +57,7 @@ public class TransactionDynamicFragmentAdapterDateItemsAdapter extends RecyclerV
         holder.txtEmailHidden.setText(String.valueOf(childItem.Email));
         holder.txtDateHidden.setText(String.valueOf(childItem.Date));
         holder.txtTransactionID.setText(String.valueOf(childItem.ID));
+        holder.txtNoteHidden.setText(String.valueOf(childItem.Note));
 
         if(childItem.Amount > 0)
             holder.txtAmount.setTextColor(Color.rgb(0, 178, 18));
@@ -83,6 +84,7 @@ public class TransactionDynamicFragmentAdapterDateItemsAdapter extends RecyclerV
         public TextView txtEmailHidden;
         public TextView txtTypeHidden;
         public TextView txtDateHidden;
+        public TextView txtNoteHidden;
         public TextView txtTransactionID;
         public LinearLayout btnItem;
         public ViewHolder(@NonNull View itemView) {
@@ -95,6 +97,7 @@ public class TransactionDynamicFragmentAdapterDateItemsAdapter extends RecyclerV
             txtDateHidden = itemView.findViewById(R.id.transaction_Date_HD);
             txtTypeHidden = itemView.findViewById(R.id.transaction_Type_HD);
             txtTransactionID = itemView.findViewById(R.id.transaction_ID_HD);
+            txtNoteHidden = itemView.findViewById(R.id.transaction_Note_HD);
             btnItem = itemView.findViewById(R.id.btn_movie);
 
             //Xử lý khi nút Chi tiết được bấm
@@ -112,6 +115,7 @@ public class TransactionDynamicFragmentAdapterDateItemsAdapter extends RecyclerV
                         editor.putString("Amount", txtAmount.getText().toString());
                         editor.putString("AmountHD", (txtAmountHD.getText().toString()));
                         editor.putString("ID", txtTransactionID.getText().toString());
+                        editor.putString("Note", txtNoteHidden.getText().toString());
                         editor.commit();
                         view.getContext().startActivity(new Intent(view.getContext().getApplicationContext(), SelectedTransactionActivity.class));
                     }
@@ -121,6 +125,9 @@ public class TransactionDynamicFragmentAdapterDateItemsAdapter extends RecyclerV
                 }
             });
         }
+    }
+    private void getTransactionDescribe(String email, String ID){
+
     }
 }
 

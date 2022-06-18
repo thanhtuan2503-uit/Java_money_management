@@ -80,7 +80,7 @@ public class TransactionAddActivity extends AppCompatActivity {
                 if(type.equals("Red"))
                     type = "Chi";
                 if(type.equals("Green"))
-                    type = "Green";
+                    type = "Thu";
                 String quantity = editextMoney.getText().toString();
                 String note = edittextNote.getText().toString();
                 String date = editTextDate.getText().toString();
@@ -129,7 +129,7 @@ public class TransactionAddActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(TransactionAddActivity.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-                        dateTxt.setText(date+"-"+month+"-"+year);
+                        dateTxt.setText(date+"/"+month+"/"+year);
                     }
                 },mYear, mMonth, mDate);
                 datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()-1000);
@@ -152,6 +152,7 @@ public class TransactionAddActivity extends AppCompatActivity {
         btnChooseSpending.setText(sharedpreferences.getString("Selected Transaction Type", ""));
         sharedpreferences = getSharedPreferences("Selected Transaction Pre-Type", Context.MODE_PRIVATE);
         String txtType2SetColor = sharedpreferences.getString("Selected Transaction Pre-Type", "");
+        Log.i("Selected", txtType2SetColor);
         if(txtType2SetColor.equals("Red")) {
             Log.d("Tracking Activity Action", txtType2SetColor);
             editextMoney.setTextColor(Color.RED);

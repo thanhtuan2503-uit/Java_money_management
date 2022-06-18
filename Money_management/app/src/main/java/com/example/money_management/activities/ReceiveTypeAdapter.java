@@ -85,7 +85,7 @@ public class ReceiveTypeAdapter extends RecyclerView.Adapter<ReceiveTypeAdapter.
                     editor.putString("Selected Transaction Type", txtTransaction.getText().toString());
                     editor.putString("Selected Transaction Limit", txtTransaction.getText().toString());
                     editor.commit();
-                    ((ReceiveTypeActivity)Context).onBackPressed();
+                    ((ReceiveTypeActivity)Context).Back2Activity();
                 }
             });
         }

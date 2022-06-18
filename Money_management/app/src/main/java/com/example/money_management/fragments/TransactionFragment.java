@@ -96,6 +96,7 @@ public class TransactionFragment extends Fragment {
     public void onViewCreated(View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
         setDynamicFragmentToTabLayout();
+        updateMoneyAmount();
     }
 
     private void setDynamicFragmentToTabLayout() {

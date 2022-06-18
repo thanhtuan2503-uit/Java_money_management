@@ -6,6 +6,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -79,6 +80,8 @@ public class ReceiveTypeActivity extends AppCompatActivity {
     }
 
     private void getReceiveTypeData() {
+        SharedPreferences sharedpreferences = getApplicationContext().getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE);
+        String logged_Email = sharedpreferences.getString("Email", "");
         Log.d(thisTag, "Tiến hành kiểm tra thông tin trên firebase");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("IncomeType")
@@ -88,6 +91,11 @@ public class ReceiveTypeActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                String email = document.getString("Email");
+                                if(email == null)
+                                    continue;
+                                if(!email.equals(logged_Email))
+                                    continue;
                                 String typeName = document.getString("TypeName");
                                 String icon = document.getString("Icon");
                                 listitem.add(new ReceiveTypeModel(typeName, icon));
@@ -103,6 +111,10 @@ public class ReceiveTypeActivity extends AppCompatActivity {
                 });
     }
 
+    public void Back2Activity(){
+        startActivity(new Intent(getApplicationContext(), TransactionAddActivity.class));  // Mở trang chủ
+        finish();
+    }
     //ánh xạ
     private void mapping(){
         btnBack = findViewById(R.id.button_back);
