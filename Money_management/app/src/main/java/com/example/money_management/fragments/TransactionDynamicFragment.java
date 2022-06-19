@@ -1,5 +1,6 @@
 package com.example.money_management.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,11 +13,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.money_management.R;
+import com.example.money_management.activities.MainActivity;
 import com.example.money_management.activities.String2Currency;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,6 +46,7 @@ public class TransactionDynamicFragment extends Fragment {
     public TextView txtIncome;
     public TextView txtOutcome;
     public TextView txtSummary;
+    public AppCompatButton btnReport;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,13 +56,12 @@ public class TransactionDynamicFragment extends Fragment {
         This = this;
         mapping();
         FirstShow = true;
-//        btnChoose.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(getContext(), SelectedTransactionActivity.class));
-//
-//            }
-//        });
+        btnReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)mView.getContext()).ClickReport();
+            }
+        });
         return mView;
     }
 
@@ -293,5 +296,6 @@ public class TransactionDynamicFragment extends Fragment {
         txtIncome = mView.findViewById(R.id.tvIncome);
         txtOutcome = mView.findViewById(R.id.tvOutcome);
         txtSummary = mView.findViewById(R.id.tvSummary);
+        btnReport = mView.findViewById(R.id.button_report);
     }
 }

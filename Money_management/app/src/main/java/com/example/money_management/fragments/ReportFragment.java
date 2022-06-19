@@ -47,6 +47,7 @@ public class ReportFragment extends Fragment {
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_report, container, false);
         mapping();
+        sharedpreferences = mView.getContext().getSharedPreferences("TransactionIndexPage", Context.MODE_PRIVATE);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -86,6 +87,14 @@ public class ReportFragment extends Fragment {
         super.onViewCreated(v, savedInstanceState);
         setDynamicFragmentToTabLayout();
         updateMoneyAmount();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Integer index = sharedpreferences.getInt("Index", 16);
+        Log.i("Indexxxx", String.valueOf(index));
+        viewPager2.setCurrentItem(index, false);
     }
 
     private void setDynamicFragmentToTabLayout() {
