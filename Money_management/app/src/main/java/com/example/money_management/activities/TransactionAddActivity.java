@@ -132,7 +132,7 @@ public class TransactionAddActivity extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(TransactionAddActivity.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-                        editTextDate.setText(date+"/"+month+"/"+year);
+                        editTextDate.setText(date+"/"+ String.valueOf(Integer.valueOf(month) + 1)+"/"+year);
                     }
                 },mYear, mMonth, mDate);
                 datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()-1000);

@@ -35,12 +35,10 @@ public class TransactionFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
     private TextView txtMoneySourceAmount;
-    private TabItem tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10, tab11, tab12;
     private SharedPreferences sharedpreferences;
     private String[] tabName={"1/2021", "2/2021","3/2021","4/2021","5/2021","6/2021","7/2021","8/2021","9/2021","10/2021","11/2021","12/2021",
                               "1/2022", "2/2022","3/2022","4/2022","5/2022","6/2022","7/2022","8/2022","9/2022","10/2022","11/2022","12/2022",
                               "1/2023", "2/2023","3/2023","4/2023","5/2023","6/2023","7/2023","8/2023","9/2023","10/2023","11/2023","12/2023"};
-    private TransactionDynamicFragment fragment;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -111,12 +109,6 @@ public class TransactionFragment extends Fragment {
         viewPager2.setCurrentItem(16, false);
     }
 
-    private void mapping() {
-        tabLayout = mView.findViewById(R.id.tab_layout);
-        viewPager2 = mView.findViewById(R.id.view_paper2);
-        txtMoneySourceAmount = mView.findViewById(R.id.txt_display_money);
-    }
-
     public void updateMoneyAmount(){
         sharedpreferences = mView.getContext().getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE); // Chọn file có tên "LoginPreferences"
         String logged_Email = sharedpreferences.getString("Email", "");
@@ -143,5 +135,11 @@ public class TransactionFragment extends Fragment {
                         }
                     }
                 });
+    }
+
+    private void mapping() {
+        tabLayout = mView.findViewById(R.id.tab_layout);
+        viewPager2 = mView.findViewById(R.id.view_paper2);
+        txtMoneySourceAmount = mView.findViewById(R.id.txt_display_money);
     }
 }

@@ -24,6 +24,7 @@
 
         <TableRow>
             <TextView
+                android:id="@+id/txt1"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
                 android:padding="3dip"
@@ -32,17 +33,20 @@
                 android:textSize="17dp" />
 
             <TextView
+                android:textStyle="bold"
+                android:id="@+id/txtSoDuDau"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="10dp"
                 android:gravity="right"
                 android:padding="3dip"
-                android:text="8,050,000"
+                android:text="0 đ"
                 android:textSize="17dp" />
         </TableRow>
 
         <TableRow>
 
             <TextView
+                android:id="@+id/txt2"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:padding="3dip"
@@ -51,12 +55,13 @@
                 android:textSize="17dp" />
 
             <TextView
+                android:textStyle="bold"
+                android:id="@+id/txtSoDuCuoi"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
                 android:gravity="right"
                 android:padding="3dip"
-                android:text="7,500,000"
-                android:textColor="#F60000"
+                android:text="0 đ"
                 android:textSize="17dp" />
         </TableRow>
     </TableLayout>
@@ -80,8 +85,10 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
             <TextView
-                android:text="1,300,000"
+                android:id="@+id/txt_ThuNhapRong"
+                android:text="0 đ"
                 android:textSize="15sp"
+                android:textStyle="bold"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/black"
                 android:gravity="right"
@@ -118,11 +125,13 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
             <TextView
-                android:text="+7,000,000"
+                android:id="@+id/txtTongThu"
+                android:text="+0 đ"
                 android:textSize="15sp"
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/black"
                 android:gravity="right"
+                android:textStyle="bold"
                 android:layout_marginRight="10dp"/>
         </TableRow>
 
@@ -156,10 +165,12 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
             <TextView
-                android:text="-5,700,100"
+                android:id="@+id/txtTongChi"
+                android:text="-0 đ"
                 android:textSize="15sp"
+                android:textStyle="bold"
                 android:layout_marginEnd="10dp"
-                android:textColor="@color/black"
+                android:textColor="#F60000"
                 android:gravity="right"
                 android:layout_marginRight="10dp"/>
         </TableRow>

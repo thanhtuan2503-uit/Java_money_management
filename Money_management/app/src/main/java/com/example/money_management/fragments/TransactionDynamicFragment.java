@@ -43,6 +43,7 @@ public class TransactionDynamicFragment extends Fragment {
     public TextView txtIncome;
     public TextView txtOutcome;
     public TextView txtSummary;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

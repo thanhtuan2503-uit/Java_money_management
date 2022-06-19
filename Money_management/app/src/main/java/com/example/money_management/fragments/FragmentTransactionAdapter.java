@@ -15,7 +15,6 @@ public class FragmentTransactionAdapter extends FragmentStateAdapter {
     private int mNumOfTabs;
     public FragmentTransactionAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, int NumOfTabs) {
         super(fragmentManager, lifecycle);
-        this.mNumOfTabs = NumOfTabs;
     }
 
     @NonNull

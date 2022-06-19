@@ -232,11 +232,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.money_management.R;
+import com.example.money_management.activities.String2Currency;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -258,7 +260,17 @@ public class ReportDynamicFragment extends Fragment {
     BarChart barChart, barChart1, barChart2;
     View mView;
     ArrayList<TransactionModel> transactionList;
+    String2Currency convert = new String2Currency();
     private SharedPreferences sharedpreferences;
+    private TextView txtTongThu;
+    private TextView txtTongChi;
+    private TextView txtThuNhapRong;
+    private TextView txtSoDuDau;
+    private TextView txtSoDuCuoi;
+    private Integer TNRThu;
+    private Integer TNRChi;
+    private Integer SoDuDau = 0;
+    private Integer SoDuCuoi = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -266,13 +278,72 @@ public class ReportDynamicFragment extends Fragment {
         mView = inflater.inflate(R.layout.fragment_dynamic_report, container, false);
         barChart = mView.findViewById(R.id.chart);
 
+        txtSoDuCuoi = mView.findViewById(R.id.txtSoDuCuoi);
+        txtSoDuDau = mView.findViewById(R.id.txtSoDuDau);
+        txtTongThu = mView.findViewById(R.id.txtTongThu);
+        txtTongChi = mView.findViewById(R.id.txtTongChi);
+        txtThuNhapRong = mView.findViewById(R.id.txt_ThuNhapRong);
         transactionList = new ArrayList<>();
-        LayDuLieuTransactions("5");
-
+        String month = String.valueOf(getArguments().getInt("Month", 1));
+        LayDuLieuTransactions(month);
+        txtTongThu.setTextColor(Color.rgb(0, 178, 18));
         return mView;
     }
 
+    private void UpdateSoDu(int month){
+        sharedpreferences = mView.getContext().getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE); // Chọn file có tên "LoginPreferences"
+        String logged_Email = sharedpreferences.getString("Email", "");  // Lấy địa chỉ email đã đăng nhập vào ứng dụng.
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Transactions")  // Chọn Bảng
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        // Chỗ này nó sẽ gọi nếu lấy dữ liệu thành công, làm mấy cái bla bla trong này
+                        if (task.isSuccessful()) {
+                            Integer sum1 = 0; // Các tháng trước
+                            Integer sum2 = 0; // Tháng hiện tại
+                            for (QueryDocumentSnapshot document : task.getResult()) {  // Duyệt từng cột trong bảng
+                                String email = document.getString("Email"); // Lấy field có tên là email.
+                                String amount = document.getString("Quantity");
+                                int quantity = Integer.parseInt(amount);
+                                String date = document.getString("Date");
+                                String type = document.getString("Type");
+                                String typeName = document.getString("TypeName");
+                                if (email == null)
+                                    continue;
+                                if (!email.equals(logged_Email))  // Không phải giao dịch của email này thì bỏ
+                                    continue;
+                                if(Integer.valueOf(date.split("/")[1]) == Integer.valueOf(month)){
+                                    if(type.equals("Thu"))
+                                        sum2 += quantity;
+                                    else
+                                        sum2 -= quantity;
+                                }
+                                if(Integer.valueOf(date.split("/")[1]) < Integer.valueOf(month)){
+                                    if(type.equals("Thu"))
+                                        sum1 += quantity;
+                                    else
+                                        sum1 -= quantity;
+                                }
+                            }
+
+                            txtSoDuDau.setText(convert.convertString2Currency(String.valueOf(sum1)));
+                            txtSoDuCuoi.setText(convert.convertString2Currency(String.valueOf(sum1 + sum2)));
+                            if(sum1 <= sum2)
+                                txtSoDuCuoi.setTextColor(Color.rgb(0, 178, 18));
+                            else
+                                txtSoDuCuoi.setTextColor(Color.rgb(246, 0,0 ));
+
+                        }
+                    }
+                });
+    }
+
     private void HienThiBaoCao(String month){
+        TNRChi = 0;
+        TNRThu = 0;
         //barchart 1: Thu nhap rong
         //Collections.sort(transactionList, (a, b) -> (Integer.valueOf(a.Date.split("/")[1]) < Integer.valueOf(b.Date.split("/")[1])) ? 1 : -1);
         BarDataSet barDataSet1 = new BarDataSet(barEntries1(), "Thu");
@@ -436,6 +507,13 @@ public class ReportDynamicFragment extends Fragment {
         barChart2.getAxisLeft().setAxisMinimum(0);
 
         barChart2.invalidate();
+
+        txtThuNhapRong.setText(convert.convertString2Currency(String.valueOf(TNRThu - TNRChi)));
+        if(Integer.valueOf(TNRThu - TNRChi) >= 0)
+            txtThuNhapRong.setTextColor(Color.rgb(0, 178, 18));
+        else
+            txtThuNhapRong.setTextColor(Color.rgb(246, 0,0 ));
+        UpdateSoDu(Integer.valueOf(month));
     }
 
     private ArrayList<BarEntry> barEntries1() {
@@ -461,6 +539,7 @@ public class ReportDynamicFragment extends Fragment {
                     sum2228 +=amount;
                 if(date >28)
                     sum2931 +=amount;
+                TNRThu += amount;
             }
             Log.i("Báo cáo thu: ", sum17 + " " + sum814+ " " + sum1521+ " " + sum2228+ " " + sum2931);
         }
@@ -469,6 +548,7 @@ public class ReportDynamicFragment extends Fragment {
         barEntries.add(new BarEntry(3, 0 + sum1521));
         barEntries.add(new BarEntry(4, 0 + sum2228));
         barEntries.add(new BarEntry(5, 0 + sum2931));
+        txtTongThu.setText(convert.convertString2Currency(String.valueOf(sum17 + sum814 + sum1521 + sum2228 + sum2931)));
         return barEntries;
     }
 
@@ -503,6 +583,7 @@ public class ReportDynamicFragment extends Fragment {
                     sum2228 +=amount;
                 if(date >28)
                     sum2931 +=amount;
+                TNRChi += amount;
             }
             Log.i("Báo cáo chi: ", sum17 + " " + sum814+ " " + sum1521+ " " + sum2228+ " " + sum2931);
         }
@@ -511,6 +592,7 @@ public class ReportDynamicFragment extends Fragment {
         barEntries.add(new BarEntry(3, 0 + sum1521));
         barEntries.add(new BarEntry(4, 0 + sum2228));
         barEntries.add(new BarEntry(5, 0 + sum2931));
+        txtTongChi.setText(convert.convertString2Currency(String.valueOf(sum17 + sum814 + sum1521 + sum2228 + sum2931)));
         return barEntries;
     }
 
@@ -549,6 +631,8 @@ public class ReportDynamicFragment extends Fragment {
     public void onResume() {
         super.onResume();
         // Load lại sơ đồ ở đây.
+        String month = String.valueOf(getArguments().getInt("Month", 1));
+        LayDuLieuTransactions(month);
     }
 
     private void LayDuLieuTransactions(String month) {
