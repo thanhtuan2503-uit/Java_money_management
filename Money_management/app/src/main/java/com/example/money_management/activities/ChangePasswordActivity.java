@@ -1,6 +1,5 @@
 package com.example.money_management.activities;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,8 +15,12 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.money_management.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -28,6 +30,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import es.dmoral.toasty.Toasty;
+
 public class ChangePasswordActivity extends AppCompatActivity {
     private ImageView btnBack;
     private AppCompatButton btnChangePassword;
@@ -35,6 +39,9 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private TextInputEditText txtCurrentPassword, txtNewPassword;
     private SharedPreferences sharedpreferences; // Lấy dữ liệu đăng nhập.
     private final String thisTag = "ChangePasswordActivityTag";
+    FirebaseAuth fAuth;
+    FirebaseUser user;
+    String userID;
 
     private interface EmailCallback{
         void isEmailExist(boolean exist, String remotePassword);
@@ -45,6 +52,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
         mapping();
+        userID = fAuth.getCurrentUser().getUid();
+
         //Log.i("Tracking Activity Created", "ChangePasswordActivity");
         sharedpreferences = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE); // Chọn file có tên "LoginPreferences" chứa email
 
@@ -60,62 +69,78 @@ public class ChangePasswordActivity extends AppCompatActivity {
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = sharedpreferences.getString("Email", null);
+                //String email = sharedpreferences.getString("Email", null);
                 String enteredNewPassword = txtNewPassword.getText().toString();
                 String enteredCurrentPassword = txtCurrentPassword.getText().toString();
-
+                user = fAuth.getCurrentUser();
                 if(enteredNewPassword.isEmpty() || enteredCurrentPassword.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Vui lòng nhập lại mật khẩu", Toast.LENGTH_SHORT).show();
+                    Toasty.error(ChangePasswordActivity.this, "Vui lòng nhập lại mật khẩu", Toasty.LENGTH_SHORT).show();
+                }
+                if(!enteredNewPassword.equals(enteredCurrentPassword))
+                {
+                    Toasty.error(ChangePasswordActivity.this,"Mật khẩu không khớp!",Toasty.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    // Kiểm tra tài khoản có tồn tại trên firebase không, kiểm trả luôn mật khẩu.
-                    checkAccountExist(new EmailCallback() {
+                    user.updatePassword(enteredCurrentPassword).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
-                        public void isEmailExist(boolean exist, String remotePassword) {
-                            if (exist) {  // Tài khoản tồn tại
-                                if (md5(enteredCurrentPassword).equals(remotePassword)) { // Đúng password
-                                    //Log.d(thisTag, "Đổi mật khẩu thành công thành công" + "  " + enteredNewPassword + "   " + remotePassword + "   " + md5(enteredNewPassword));
-                                    
-                                    // Cập nhật mật khẩu lên firestore
-                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                    CollectionReference usersRef = db.collection("Accounts");
-                                    Query query = usersRef.whereEqualTo("Username", email);
-                                    query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            if (task.isSuccessful()) {
-                                                //Log.d(thisTag, "Thành công lấy dữ liệu từ filestore", task.getException());
-                                                String remotePassword = md5(md5(email));
-                                                for (DocumentSnapshot documentsnap : task.getResult()) {
-                                                    String account = documentsnap.getString("Username");
-                                                    if (account.equals(email)) {
-                                                        db.collection("Accounts").document(documentsnap.getId()).update("Password", md5(enteredNewPassword));
-                                                        Log.d(thisTag, "Thành công đổi mật khẩu" + "    "  + documentsnap.getId(), task.getException());
-                                                        return;
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    });
-                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));  // Mở trang chủ
-                                    finish();
-                                } else { // Sai password
-                                    AlertDialog alertDialog = new AlertDialog.Builder(ChangePasswordActivity.this).create();
-                                    alertDialog.setTitle("Sai mật khẩu");
-                                    alertDialog.setMessage(("Hãy kiểm tra lại thông tin"));
-                                    alertDialog.show();
-                                    //Log.d(thisTag, "Sai mật khẩu");
-                                }
-                            } else { // Không tồn tại tài khoản
-                                AlertDialog alertDialog = new AlertDialog.Builder(ChangePasswordActivity.this).create();
-                                alertDialog.setTitle("Tài khoản không tồn tại");
-                                alertDialog.setMessage(("Hãy kiểm tra lại thông tin"));
-                                alertDialog.show();
-                               // Log.d(thisTag, "Không tồn tại tài khoản");
-                            }
+                        public void onSuccess(Void aVoid) {
+                            Toasty.success(ChangePasswordActivity.this,"Đổi mật khẩu thành công!",Toasty.LENGTH_SHORT).show();
+                            finish();
                         }
-                    }, email);
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toasty.error(ChangePasswordActivity.this,"Đổi mật khẩu thất bại!",Toasty.LENGTH_SHORT).show();
+                        }
+                    });
+                    // Kiểm tra tài khoản có tồn tại trên firebase không, kiểm trả luôn mật khẩu.
+//                    checkAccountExist(new EmailCallback() {
+//                        @Override
+//                        public void isEmailExist(boolean exist, String remotePassword) {
+//                            if (exist) {  // Tài khoản tồn tại
+//                                if (md5(enteredCurrentPassword).equals(remotePassword)) { // Đúng password
+//                                    //Log.d(thisTag, "Đổi mật khẩu thành công thành công" + "  " + enteredNewPassword + "   " + remotePassword + "   " + md5(enteredNewPassword));
+//
+//                                    // Cập nhật mật khẩu lên firestore
+//                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+//                                    CollectionReference usersRef = db.collection("Accounts");
+//                                    Query query = usersRef.whereEqualTo("Username", email);
+//                                    query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                                        @Override
+//                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                                            if (task.isSuccessful()) {
+//                                                //Log.d(thisTag, "Thành công lấy dữ liệu từ filestore", task.getException());
+//                                                String remotePassword = md5(md5(email));
+//                                                for (DocumentSnapshot documentsnap : task.getResult()) {
+//                                                    String account = documentsnap.getString("Username");
+//                                                    if (account.equals(email)) {
+//                                                        db.collection("Accounts").document(documentsnap.getId()).update("Password", md5(enteredNewPassword));
+//                                                        Log.d(thisTag, "Thành công đổi mật khẩu" + "    "  + documentsnap.getId(), task.getException());
+//                                                        return;
+//                                                    }
+//                                                }
+//                                            }
+//                                        }
+//                                    });
+//                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));  // Mở trang chủ
+//                                    finish();
+//                                } else { // Sai password
+//                                    AlertDialog alertDialog = new AlertDialog.Builder(ChangePasswordActivity.this).create();
+//                                    alertDialog.setTitle("Sai mật khẩu");
+//                                    alertDialog.setMessage(("Hãy kiểm tra lại thông tin"));
+//                                    alertDialog.show();
+//                                    //Log.d(thisTag, "Sai mật khẩu");
+//                                }
+//                            } else { // Không tồn tại tài khoản
+//                                AlertDialog alertDialog = new AlertDialog.Builder(ChangePasswordActivity.this).create();
+//                                alertDialog.setTitle("Tài khoản không tồn tại");
+//                                alertDialog.setMessage(("Hãy kiểm tra lại thông tin"));
+//                                alertDialog.show();
+//                               // Log.d(thisTag, "Không tồn tại tài khoản");
+//                            }
+//                        }
+//                    }, email);
                 }
 
             }
@@ -183,7 +208,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private void mapping(){
         btnBack = findViewById(R.id.button_back);
         btnChangePassword = findViewById(R.id.button_change_password);
-        txtCurrentPassword = findViewById(R.id.txt_current_password);
-        txtNewPassword = findViewById(R.id.txt_new_password);
+        txtCurrentPassword = findViewById(R.id.edittext_password);
+        txtNewPassword = findViewById(R.id.edittext_newpassword);
+        fAuth = FirebaseAuth.getInstance();
     }
 }
