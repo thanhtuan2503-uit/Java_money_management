@@ -233,60 +233,34 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void createMoneySource(String email) {
-        userID = fAuth.getCurrentUser().getUid();
-        DocumentReference documentReference = fStore.collection("MoneySource").document(userID);
         Map<String, Object> account = new HashMap<>();
         account.put("Email", email);
         account.put("Amount", "0");
         account.put("SourceName", "Tiền Mặt");
-        documentReference.set(account).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Log.d(thisTag, "DocumentSnapshot added with ID: " + userID);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w(thisTag, "Error adding document", e);
-            }
-        });
 
-//        fStore.collection("MoneySource")
-//                .add(account)
-//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(DocumentReference documentReference) {
-//                        Log.d(thisTag, "DocumentSnapshot added with ID: " + documentReference.getId());
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w(thisTag, "Error adding document", e);
-//                    }
-//                });
+        fStore.collection("MoneySource")
+                .add(account)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(thisTag, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(thisTag, "Error adding document", e);
+                    }
+                });
     }
 
     private void createIncomeOutcomeType(String email, String ocTypeName, String icTypeName) {
-        userID = fAuth.getCurrentUser().getUid();
-        DocumentReference documentReference = fStore.collection("IncomeType").document(userID);
         Map<String, Object> income = new HashMap<>();
         income.put("Describe", "");
         income.put("Email", email);
         income.put("Icon", "");
         income.put("Limit", 100.0F);
         income.put("TypeName", icTypeName);
-        documentReference.set(income).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Log.d(thisTag, "DocumentSnapshot added with ID: " + userID);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w(thisTag, "Error adding document", e);
-            }
-        });
 
         Map<String, Object> outcome = new HashMap<>();
         outcome.put("Describe", "");
@@ -294,49 +268,38 @@ public class RegisterActivity extends AppCompatActivity {
         outcome.put("Icon", "");
         outcome.put("Limit", 100.0F);
         outcome.put("TypeName", ocTypeName);
-        documentReference.set(outcome).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                Log.d(thisTag, "DocumentSnapshot added with ID: " + userID);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.w(thisTag, "Error adding document", e);
-            }
-        });
 
-//        if (!icTypeName.equals(""))
-//            fStore.collection("IncomeType")
-//                    .add(income)
-//                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                        @Override
-//                        public void onSuccess(DocumentReference documentReference) {
-//                            Log.d(thisTag, "DocumentSnapshot added with ID: " + documentReference.getId());
-//                        }
-//                    })
-//                    .addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Log.w(thisTag, "Error adding document", e);
-//                        }
-//                    });
-//
-//        if (!ocTypeName.equals(""))
-//            fStore.collection("SpendingType")
-//                    .add(outcome)
-//                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                        @Override
-//                        public void onSuccess(DocumentReference documentReference) {
-//                            Log.d(thisTag, "DocumentSnapshot added with ID: " + documentReference.getId());
-//                        }
-//                    })
-//                    .addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Log.w(thisTag, "Error adding document", e);
-//                        }
-//                    });
+        if(!icTypeName.equals(""))
+            fStore.collection("IncomeType")
+                    .add(income)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d(thisTag, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(thisTag, "Error adding document", e);
+                        }
+                    });
+
+        if(!ocTypeName.equals(""))
+            fStore.collection("SpendingType")
+                    .add(outcome)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d(thisTag, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(thisTag, "Error adding document", e);
+                        }
+                    });
     }
 
     // Kiểm tra nội dung người dùng nhập có phải là email không.

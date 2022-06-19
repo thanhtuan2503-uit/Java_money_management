@@ -1,6 +1,5 @@
 package com.example.money_management.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,7 +29,6 @@ public class PaybookChooseActivity extends AppCompatActivity {
         button_types_of_taxes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent());
             }
         });
         button_types_of_genera.setOnClickListener(new View.OnClickListener() {
