@@ -92,7 +92,7 @@
             android:layout_height="2dip"
             android:background="#CDCDCD" />
         <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/chart1"
+            android:id="@+id/chart"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
@@ -130,7 +130,7 @@
             android:layout_height="2dip"
             android:background="#CDCDCD" />
         <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/chart2"
+            android:id="@+id/chart1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
@@ -167,7 +167,11 @@
             android:layout_height="2dip"
             android:background="#CDCDCD" />
         <com.github.mikephil.charting.charts.BarChart
+<<<<<<< Updated upstream
             android:id="@+id/chart3"
+=======
+            android:id="@+id/chart2"
+>>>>>>> Stashed changes
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
