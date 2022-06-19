@@ -164,6 +164,7 @@ public class LoginActivity extends AppCompatActivity {
     private void login(){
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+        userID = fAuth.getCurrentUser().getUid();
         if(TextUtils.isEmpty(email))
         {
             editTextEmail.setError("Vui lòng nhập email!");

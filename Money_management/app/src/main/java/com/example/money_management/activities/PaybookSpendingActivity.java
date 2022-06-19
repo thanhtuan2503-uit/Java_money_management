@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,10 +18,12 @@ import com.google.android.material.textview.MaterialTextView;
 import java.util.Calendar;
 
 public class PaybookSpendingActivity extends AppCompatActivity {
-    private MaterialTextView btnChooseTransaction;
     private ImageView cal;
     private TextInputEditText dateTxt;
     private int mDate, mMonth, mYear;
+    private ImageView btnClose;
+    private TextView btnSave;
+    private MaterialTextView txtChooseSpending;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,19 @@ public class PaybookSpendingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_paybook_spending);
         mapping();
         Log.i("Tracking Activity Created", "PaybookSpendingActivity");
-        btnChooseTransaction.setOnClickListener(new View.OnClickListener() {
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        txtChooseSpending.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), PaybookChooseActivity.class));
@@ -54,8 +69,10 @@ public class PaybookSpendingActivity extends AppCompatActivity {
     }
 
     private void mapping() {
-        btnChooseTransaction = findViewById(R.id.txt_choose_spending);
         cal = findViewById(R.id.button_choose_time);
         dateTxt = findViewById(R.id.editext_date);
+        btnClose = findViewById(R.id.button_close);
+        btnSave = findViewById(R.id.button_save);
+        txtChooseSpending = findViewById(R.id.txt_choose_spending);
     }
 }
