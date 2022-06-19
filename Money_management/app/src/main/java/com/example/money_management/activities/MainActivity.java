@@ -81,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void ClickReport(){
+        bottomNavigationView.setSelectedItemId(R.id.report);
+    }
     // ánh xạ
     private void mapping(){
         btnAddTransaction = findViewById(R.id.btn_add_transaction);
