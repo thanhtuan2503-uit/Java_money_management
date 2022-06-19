@@ -250,6 +250,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 public class ReportDynamicFragment extends Fragment {
@@ -266,22 +267,29 @@ public class ReportDynamicFragment extends Fragment {
         barChart = mView.findViewById(R.id.chart);
 
         transactionList = new ArrayList<>();
-        LayDuLieuTransactions();
+        LayDuLieuTransactions("5");
 
         return mView;
     }
 
-    private void HienThiBaoCao(){
+    private void HienThiBaoCao(String month){
         //barchart 1: Thu nhap rong
+        //Collections.sort(transactionList, (a, b) -> (Integer.valueOf(a.Date.split("/")[1]) < Integer.valueOf(b.Date.split("/")[1])) ? 1 : -1);
         BarDataSet barDataSet1 = new BarDataSet(barEntries1(), "Thu");
         barDataSet1.setColor(Color.GREEN);
         BarDataSet barDataSet2 = new BarDataSet(barEntries2(), "Chi");
         barDataSet2.setColor(Color.RED);
 
+        barChart.notifyDataSetChanged();
         BarData data = new BarData(barDataSet1, barDataSet2);
+        data.notifyDataChanged();
         barChart.setData(data);
 
-        String[] date = new String[]{"1/2 - 7/2", "8/2 - 14/2", "15/2 - 21/2", "22/2 - 28/2", "29/2 - 31/2"};
+        String[] date = new String[]{"1/" + month + " - 7/"  + month,
+                                    "8/" + month + " - 14/"  + month,
+                                    "15/" + month + " - 21/"  + month,
+                                    "22/" + month + " - 28/"  + month,
+                                    "29/" + month + " - 31/"  + month};
         XAxis xAxis = barChart.getXAxis();
         xAxis.setValueFormatter(new IndexAxisValueFormatter(date));
         xAxis.setCenterAxisLabels(true);
@@ -303,21 +311,54 @@ public class ReportDynamicFragment extends Fragment {
         barChart.groupBars(0, groupSpace, barSpace);
 
         barChart.invalidate();
-        // barchart 2
-        barChart1 = mView.findViewById(R.id.chart1);
-        BarDataSet barDataSet3 = new BarDataSet(barEntries3(), "Thu");
-        barDataSet3.setColor(Color.GREEN);
 
+
+        // barchart 2: Tong thu
+        ArrayList<String> typeNameListFirst = new ArrayList<>();
+
+        // Lấy các loại thu.
+        for (int i = 0; i < transactionList.size(); i++) {
+            if (!transactionList.get(i).Type.equals("Thu"))
+                continue;
+            typeNameListFirst.add(transactionList.get(i).TypeName);
+        }
+
+        // Xóa các loại trùng.
+        ArrayList<String> typeNameList = removeDuplicates(typeNameListFirst);
+        ArrayList<Integer> amountList = new ArrayList<>();
+
+        for (int i =0; i < typeNameList.size(); i++){
+            String typeNameItem = typeNameList.get(i);
+            Integer sumAmount = 0;
+            for(int j = 0; j < transactionList.size(); j++){
+                String type = transactionList.get(j).Type;
+                String typeName = transactionList.get(j).TypeName;
+                Integer amount = transactionList.get(j).Amount;
+                if(!type.equals("Thu"))
+                    continue;
+                if(!typeName.equals(typeNameItem))
+                    continue;
+                sumAmount += amount;
+            }
+            amountList.add(sumAmount);
+        }
+        barChart1 = mView.findViewById(R.id.chart1);
+        BarDataSet barDataSet3 = new BarDataSet(barEntries3(amountList), "Thu");
+        barDataSet3.setColor(Color.GREEN);
+//
+//        barChart1.notifyDataSetChanged();
         BarData data1 = new BarData();
+        data1.notifyDataChanged();
         data1.addDataSet(barDataSet3);
 
-        String[] content = new String[]{"Hốt hụi", "A trả nợ", "Lương"};
-        xAxis = barChart1.getXAxis();
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(content));
-        xAxis.setCenterAxisLabels(true);
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setGranularity(1);
-        xAxis.setGranularityEnabled(true);
+
+        XAxis xAxis2 = barChart.getXAxis();
+        xAxis2 = barChart1.getXAxis();
+        xAxis2.setValueFormatter(new IndexAxisValueFormatter(typeNameList));
+        xAxis2.setCenterAxisLabels(true);
+        xAxis2.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis2.setGranularity(1);
+        xAxis2.setGranularityEnabled(true);
 
         barChart1.setDragEnabled(true);
         barChart1.setVisibleXRangeMaximum(1);
@@ -328,35 +369,70 @@ public class ReportDynamicFragment extends Fragment {
         data1.setBarWidth(0.5f);
 
         barChart1.getXAxis().setAxisMinimum(0);
-        barChart1.getXAxis().setAxisMaximum(0 + barChart1.getBarData().getGroupWidth(groupSpace1, barSpace1) * 3);
+        barChart1.getXAxis().setAxisMaximum(0 + barChart1.getBarData().getGroupWidth(groupSpace1, barSpace1) * typeNameList.size());
         barChart1.getAxisLeft().setAxisMinimum(0);
 
 //        barChart1.groupBars(0, groupSpace1, barSpace1);
         barChart1.invalidate();
+
+
         // barchart 3: Tong chi
+
+        ArrayList<String> typeNameListFirst1 = new ArrayList<>();
+
+        // Lấy các loại chi.
+        for (int i = 0; i < transactionList.size(); i++) {
+            if (!transactionList.get(i).Type.equals("Chi"))
+                continue;
+            typeNameListFirst1.add(transactionList.get(i).TypeName);
+        }
+
+        // Xóa các loại trùng.
+        ArrayList<String> typeNameList1 = removeDuplicates(typeNameListFirst1);
+        ArrayList<Integer> amountList1 = new ArrayList<>();
+
+        for (int i =0; i < typeNameList1.size(); i++){
+            String typeNameItem = typeNameList1.get(i);
+            Integer sumAmount1 = 0;
+            for(int j = 0; j < transactionList.size(); j++){
+                String type = transactionList.get(j).Type;
+                String typeName = transactionList.get(j).TypeName;
+                Integer amount = transactionList.get(j).Amount;
+                if(!type.equals("Chi"))
+                    continue;
+                if(!typeName.equals(typeNameItem))
+                    continue;
+                sumAmount1 += amount;
+            }
+            amountList1.add(sumAmount1);
+        }
         barChart2 = mView.findViewById(R.id.chart2);
-        BarDataSet barDataSet4 = new BarDataSet(barEntries3(), "Chi");
+        BarDataSet barDataSet4 = new BarDataSet(barEntries4(amountList1), "Chi");
         barDataSet4.setColor(Color.RED);
 
-//        BarData data1 = new BarData();
-        data1.addDataSet(barDataSet3);
+        BarData data2 = new BarData();
+        data2.notifyDataChanged();
+        data2.addDataSet(barDataSet4);
+        barChart2.notifyDataSetChanged();
+        data2.notifyDataChanged();
 
 //        String[] content = new String[]{"Hốt hụi", "A trả nợ", "Lương"};
-        xAxis = barChart2.getXAxis();
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(content));
-        xAxis.setCenterAxisLabels(true);
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setGranularity(1);
-        xAxis.setGranularityEnabled(true);
+        XAxis xAxis3 = barChart.getXAxis();
+        xAxis3 = barChart2.getXAxis();
+        xAxis3.setValueFormatter(new IndexAxisValueFormatter(typeNameList1));
+        xAxis3.setCenterAxisLabels(true);
+        xAxis3.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis3.setGranularity(1);
+        xAxis3.setGranularityEnabled(true);
 
         barChart2.setDragEnabled(true);
         barChart2.setVisibleXRangeMaximum(1);
 
-        barChart2.setData(data1);
-        data1.setBarWidth(0.5f);
+        barChart2.setData(data2);
+        data2.setBarWidth(0.5f);
 
         barChart2.getXAxis().setAxisMinimum(0);
-        barChart2.getXAxis().setAxisMaximum(0 + barChart2.getBarData().getGroupWidth(groupSpace1, barSpace1) * 3);
+        barChart2.getXAxis().setAxisMaximum(0 + barChart2.getBarData().getGroupWidth(groupSpace1, barSpace1) * typeNameList1.size());
         barChart2.getAxisLeft().setAxisMinimum(0);
 
         barChart2.invalidate();
@@ -365,53 +441,107 @@ public class ReportDynamicFragment extends Fragment {
     private ArrayList<BarEntry> barEntries1() {
         Log.i("Đang thêm dữ liệu vào báo cáo", "Thu");
         ArrayList<BarEntry> barEntries = new ArrayList<>();
-        for (int i = 0; i < transactionList.size(); i++) {
-                float j = i+1;
-                if (transactionList.get(i).Type.equals("Thu")) {
-                    float y = Float.parseFloat(String.valueOf(transactionList.get(i).Amount));
 
-                    Log.i("Báo cáo thu: ", j + " " + String.valueOf(y));
-                    barEntries.add(new BarEntry(0 + j, 0 + y + i));
+        Integer sum17 = 0;
+        Integer sum814 = 0;
+        Integer sum1521 = 0;
+        Integer sum2228 = 0;
+        Integer sum2931 = 0;
+        for (int i = 0; i < transactionList.size(); i++) {
+            if (transactionList.get(i).Type.equals("Thu")) {
+                Integer date = Integer.parseInt(transactionList.get(i).Date.split("/")[0]);
+                Integer amount = transactionList.get(i).Amount;
+                if(date <= 7)
+                    sum17 += amount;
+                if(date > 7 && date <= 14)
+                    sum814 += amount;
+                if(date >14 && date <=21)
+                    sum1521 += amount;
+                if(date >21 && date <=28)
+                    sum2228 +=amount;
+                if(date >28)
+                    sum2931 +=amount;
             }
+            Log.i("Báo cáo thu: ", sum17 + " " + sum814+ " " + sum1521+ " " + sum2228+ " " + sum2931);
         }
-//        barEntries.add(new BarEntry(1, 1000000));
-//        barEntries.add(new BarEntry(2, 3500000));
-//        barEntries.add(new BarEntry(3, 2500000));
-//        barEntries.add(new BarEntry(4, 7000000));
+        barEntries.add(new BarEntry(1, 0 + sum17));
+        barEntries.add(new BarEntry(2, 0 + sum814));
+        barEntries.add(new BarEntry(3, 0 + sum1521));
+        barEntries.add(new BarEntry(4, 0 + sum2228));
+        barEntries.add(new BarEntry(5, 0 + sum2931));
         return barEntries;
     }
 
     private ArrayList<BarEntry> barEntries2() {
         Log.i("Đang thêm dữ liệu vào báo cáo", "Chi");
         ArrayList<BarEntry> barEntries = new ArrayList<>();
+//        int j = 1;
+//        for (int i = 0; i < transactionList.size(); i++) {
+//                if (transactionList.get(i).Type.equals("Chi")) {
+//                    int y = transactionList.get(i).Amount;
+//                    Log.i("Báo cáo chi: ", j + " " + y);
+//                    barEntries.add(new BarEntry(0 + j, 0 + y));
+//                    j++;
+//                }
+//        }
+        Integer sum17 = 0;
+        Integer sum814 = 0;
+        Integer sum1521 = 0;
+        Integer sum2228 = 0;
+        Integer sum2931 = 0;
         for (int i = 0; i < transactionList.size(); i++) {
-            float j = i+1;
-                if (transactionList.get(i).Type.equals("Chi")) {
-                    float y = Float.parseFloat(String.valueOf(transactionList.get(i).Amount));
-                    Log.i("Báo cáo chi: ", j + " " + y);
-                    barEntries.add(new BarEntry(0+j, 0+y + i));
-                }
+            if (transactionList.get(i).Type.equals("Chi")) {
+                Integer date = Integer.parseInt(transactionList.get(i).Date.split("/")[0]);
+                Integer amount = transactionList.get(i).Amount;
+                if(date <= 7)
+                    sum17 += amount;
+                if(date > 7 && date <= 14)
+                    sum814 += amount;
+                if(date >14 && date <=21)
+                    sum1521 += amount;
+                if(date >21 && date <=28)
+                    sum2228 +=amount;
+                if(date >28)
+                    sum2931 +=amount;
+            }
+            Log.i("Báo cáo chi: ", sum17 + " " + sum814+ " " + sum1521+ " " + sum2228+ " " + sum2931);
         }
-//        barEntries.add(new BarEntry(1, 1000000));
-//        barEntries.add(new BarEntry(2, 2000000));
-//        barEntries.add(new BarEntry(3, 4000000));
-//        barEntries.add(new BarEntry(4, 5500000));
+        barEntries.add(new BarEntry(1, 0 + sum17));
+        barEntries.add(new BarEntry(2, 0 + sum814));
+        barEntries.add(new BarEntry(3, 0 + sum1521));
+        barEntries.add(new BarEntry(4, 0 + sum2228));
+        barEntries.add(new BarEntry(5, 0 + sum2931));
         return barEntries;
     }
 
-    private ArrayList<BarEntry> barEntries3() {
+    private ArrayList<BarEntry> barEntries3(ArrayList<Integer> amountList) {
         ArrayList<BarEntry> barEntries = new ArrayList<>();
-        for (int i = 0; i < transactionList.size(); i++) {
-            float j = i+1;
-                if (transactionList.get(i).Type.equals("Thu")) {
-                    float y = Float.parseFloat(String.valueOf(transactionList.get(i).Amount));
-                    Log.i("Báo cáo thu3: ", j + " " + y);
-                    barEntries.add(new BarEntry(0+j, 0+y + i));
-            }
+        int j = 1;
+        for (int i = 0; i < amountList.size(); i++) {
+                    barEntries.add(new BarEntry(0 + j, 0 + amountList.get(i)));
+                    j++;
         }
-//        barEntries.add(new BarEntry(1, 1000000));
-//        barEntries.add(new BarEntry(2, 2000000));
-//        barEntries.add(new BarEntry(3, 4000000));
+        return barEntries;
+    }
+
+    private ArrayList<BarEntry> barEntries4(ArrayList<Integer> amountList) {
+//        ArrayList<BarEntry> barEntries = new ArrayList<>();
+//        int j = 1;
+//        for (int i = 0; i < transactionList.size(); i++) {
+//                if (transactionList.get(i).Type.equals("Chi")) {
+//                    int y = transactionList.get(i).Amount;
+//                    Log.i("Báo cáo chi: ", j + " " + y);
+//                    barEntries.add(new BarEntry(0 + j, 0 + y));
+//                    j++;
+//                }
+//        }
+//        return barEntries;
+        ArrayList<BarEntry> barEntries = new ArrayList<>();
+        int j = 1;
+        for (int i = 0; i < amountList.size(); i++) {
+            barEntries.add(new BarEntry(0 + j, 0 + amountList.get(i)));
+            j++;
+        }
         return barEntries;
     }
 
@@ -421,7 +551,7 @@ public class ReportDynamicFragment extends Fragment {
         // Load lại sơ đồ ở đây.
     }
 
-    private void LayDuLieuTransactions() {
+    private void LayDuLieuTransactions(String month) {
         // Lay du lieu tu firestore
         sharedpreferences = mView.getContext().getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE); // Chọn file có tên "LoginPreferences"
         String logged_Email = sharedpreferences.getString("Email", "");  // Lấy địa chỉ email đã đăng nhập vào ứng dụng.
@@ -446,14 +576,36 @@ public class ReportDynamicFragment extends Fragment {
                                     continue;
                                 if (!email.equals(logged_Email))  // Không phải giao dịch của email này thì bỏ
                                     continue;
-                                transactionList.add(new TransactionModel(date, email, "", quantity, "", type, typeName, ""));
+                                if(date.split("/")[1].equals(month))
+
+                                transactionList.add(new TransactionModel(email, date, "", quantity, "", type, typeName, ""));
 //                                Log.i("Dữ liệu lấy được từ báo cáo: ", document.toString());
                                 Log.i("Dữ liệu lấy được từ báo cáo: ", amount + " " + date + " " + email);
                             }
-                            HienThiBaoCao();
+                            HienThiBaoCao(month);
                         }
 
                     }
                 });
+    }
+    public static <T> ArrayList<T> removeDuplicates(ArrayList<T> list)
+    {
+
+        // Create a new ArrayList
+        ArrayList<T> newList = new ArrayList<T>();
+
+        // Traverse through the first list
+        for (T element : list) {
+
+            // If this element is not present in newList
+            // then add it
+            if (!newList.contains(element)) {
+
+                newList.add(element);
+            }
+        }
+
+        // return the new list
+        return newList;
     }
 }
