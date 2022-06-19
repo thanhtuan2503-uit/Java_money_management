@@ -220,6 +220,7 @@ public class AccountFragment extends Fragment {
         CollectionReference usersRef = db.collection("Accounts");
         Query query = usersRef.whereEqualTo("Email", email);
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 //Lấy dữ liệu user từ firebase

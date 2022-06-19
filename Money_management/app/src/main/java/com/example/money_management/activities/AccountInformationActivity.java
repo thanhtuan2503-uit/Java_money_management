@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,7 +44,6 @@ public class AccountInformationActivity extends AppCompatActivity {
     private SharedPreferences sharedpreferences; // Để thay đổi dữ trạng thái đăng nhập.
     private final String thisTag = "AccountInformationTag";
     private CircleImageView imageUser;
-    private ImageView changeProfile;
     FirebaseUser user;
     FirebaseFirestore fStore;
     FirebaseAuth fAuth;
@@ -72,15 +70,6 @@ public class AccountInformationActivity extends AppCompatActivity {
                 finish();
             }
         });
-        changeProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //open gallery
-                Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(openGalleryIntent,1000);
-            }
-        });
-
         btnChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,7 +177,6 @@ public class AccountInformationActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.button_logout);
         btnBack =  findViewById(R.id.button_back);
         imageUser = findViewById(R.id.avatar);
-        changeProfile = findViewById(R.id.changeProfile);
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();

@@ -234,7 +234,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:background="@drawable/ic_baseline_account_balance_wallet_24"/>
+                        android:background="@drawable/ic_baseline_edit_24"/>
                     <TextView
                         android:id="@+id/selected_Note"
                         android:layout_width="match_parent"
@@ -245,6 +245,17 @@
                         android:textSize="17sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/button_choose_money"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/txt_limitx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="300dp"
+                        android:text="(ghi chú)"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

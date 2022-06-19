@@ -55,6 +55,7 @@ dependencies {
     implementation 'com.github.dhaval2404:imagepicker:2.1'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.github.GrenderG:Toasty:1.5.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
     //Firebase
     implementation platform('com.google.firebase:firebase-bom:30.1.0')
     implementation 'com.google.firebase:firebase-firestore:19.0.0'
