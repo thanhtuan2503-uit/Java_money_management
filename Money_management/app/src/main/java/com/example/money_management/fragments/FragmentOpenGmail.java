@@ -41,8 +41,7 @@ public class FragmentOpenGmail extends Fragment {
             textview_openlogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), LoginActivity.class);
-                    startActivity(intent);
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
                     getActivity().finish();
                     getActivity().overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                 }

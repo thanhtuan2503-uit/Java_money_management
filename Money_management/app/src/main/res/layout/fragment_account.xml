@@ -78,6 +78,8 @@
                         android:layout_alignParentTop="true"
                         android:layout_marginTop="5dp"
                         android:text="@string/username"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
                         android:textAppearance="@style/username"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

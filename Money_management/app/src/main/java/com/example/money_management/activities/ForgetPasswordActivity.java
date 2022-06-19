@@ -25,15 +25,13 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_forget_password);
         current_Fragment = 0;
         openSendemailFragment();
-
     }
 
     @Override
     public void onBackPressed() {
         if(current_Fragment == 1)
         {
-            Intent intent = new Intent(ForgetPasswordActivity.this, LoginActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(ForgetPasswordActivity.this, LoginActivity.class));
             super.onBackPressed();
             overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
         }

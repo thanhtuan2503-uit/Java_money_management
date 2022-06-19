@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,7 +39,6 @@ public class TransactionAddActivity extends AppCompatActivity {
     private MaterialTextView btnChooseSpending;
     private SharedPreferences sharedpreferences; // Lấy dữ liệu đã chọn
     private boolean Activity_First_Show = false;
-    private TextInputEditText dateTxt;
     private int mDate, mMonth, mYear;
 
     @Override
@@ -127,14 +125,14 @@ public class TransactionAddActivity extends AppCompatActivity {
         cal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Calendar Cal = Calendar.getInstance();
+                Calendar Cal = Calendar.getInstance();
                 mDate = Cal.get(Calendar.DATE);
                 mMonth = Cal.get(Calendar.MONTH);
                 mYear = Cal.get(Calendar.YEAR);
                 DatePickerDialog datePickerDialog = new DatePickerDialog(TransactionAddActivity.this, android.R.style.Theme_DeviceDefault_Dialog, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-                        dateTxt.setText(date+"/"+month+"/"+year);
+                        editTextDate.setText(date+"/"+month+"/"+year);
                     }
                 },mYear, mMonth, mDate);
                 datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()-1000);
@@ -177,6 +175,5 @@ public class TransactionAddActivity extends AppCompatActivity {
         editTextDate = findViewById(R.id.editext_date);
         edittextNote = findViewById(R.id.edittext_note);
         cal = findViewById(R.id.button_choose_time);
-        dateTxt = findViewById(R.id.editext_date);
     }
 }

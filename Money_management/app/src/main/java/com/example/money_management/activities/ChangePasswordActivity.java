@@ -120,13 +120,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
             }
         });
-
-        btnForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 
     // Kiểm tra trên firebase nếu tài khoản có tồn tại và kiểm trả mật khẩu
@@ -190,7 +183,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private void mapping(){
         btnBack = findViewById(R.id.button_back);
         btnChangePassword = findViewById(R.id.button_change_password);
-        btnForgotPassword = findViewById(R.id.forgot_password);
         txtCurrentPassword = findViewById(R.id.txt_current_password);
         txtNewPassword = findViewById(R.id.txt_new_password);
     }

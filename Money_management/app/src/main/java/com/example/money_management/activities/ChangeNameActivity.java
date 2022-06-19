@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -54,6 +55,7 @@ public class ChangeNameActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please Enter the Data", Toast.LENGTH_SHORT).show();
                 } else {
                     changeName(email, enteredData);
+                    SystemClock.sleep(1000);
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));  // Mở trang chủ
                     finish();
                 }

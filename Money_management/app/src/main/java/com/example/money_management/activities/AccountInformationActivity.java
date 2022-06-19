@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -103,7 +104,10 @@ public class AccountInformationActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //Log.i("Reload data user", "AccountInformationActivity");
-        //syncUserWithFirebase();
+        sharedpreferences = getSharedPreferences("LoginPreferences", Context.MODE_PRIVATE); // Lay thong tin dang nhap
+        String email = sharedpreferences.getString("Email", null);
+        SystemClock.sleep(1000);
+        syncUserWithFirebase(email);
     }
 
     @Override

@@ -39,18 +39,14 @@ public class FragmentSendEmail extends Fragment {
         button_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (sendEmail()) {
-
-                }
-
+                sendEmail();
             }
         });
 
         textview_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(getActivity(), LoginActivity.class));
                 getActivity().finish();
                 getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
@@ -70,7 +66,7 @@ public class FragmentSendEmail extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        Toasty.success(activity.getApplicationContext(), "check your email", Toast.LENGTH_SHORT).show();
+                        Toasty.success(activity.getApplicationContext(), "Vui lòng kiểm tra email của bạn!", Toast.LENGTH_SHORT).show();
                         activity.openOpengmailFragment();
                     } else {
                         Toasty.error(activity.getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
@@ -84,7 +80,7 @@ public class FragmentSendEmail extends Fragment {
 
     private boolean validateData(String email) {
         if (email.isEmpty()) {
-            textInput_email.setError("email is required");
+            textInput_email.setError("Vui lòng nhập email!");
             return false;
         } else {
             return true;
